@@ -1,0 +1,15 @@
+@font-face {
+    font-family: pacfont;
+    src: url('../assets/fonts/emulogic-font/Emulogic-zrEw.ttf');
+}
+
+
+body{
+    background-color: black;
+    color: white;
+    font-family: pacfont;
+}
+
+#display-board{
+    display: grid;
+}
