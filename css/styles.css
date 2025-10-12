@@ -9,7 +9,34 @@ body{
     color: white;
     font-family: pacfont;
 }
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dot{
+    width: 8px;
+    height: 8px;
+    background-color: #ffb897;
+    border-radius: 50%;
+}
+.tile{
+    width: 16px;
+    height: 16px;
+    /* border: 1px dotted white; */
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+}
+.blocked{
+    /* border: 2px double blue; */
+    /* border-left: 3px double blue;  */
+    /* border-right: 3px double blue; */
+    /* border-radius: 2px; */
+    /* background-color: ; */
 
+}
 #display-board{
     display: grid;
+
 }
