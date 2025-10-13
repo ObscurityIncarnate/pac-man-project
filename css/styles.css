@@ -14,11 +14,37 @@ main{
     justify-content: center;
     align-items: center;
 }
-.dot{
+.dot div{
     width: 8px;
     height: 8px;
-    background-color: #ffb897;
-    border-radius: 50%;
+    background-image: url('../assets/Pac-Man - All Assets_Palettes.png');
+    background-position : -936px -205px;
+	background-repeat: no-repeat;
+}
+.powerPellet{
+    background-image: url('../assets/Pac-Man - All Assets_Palettes.png');
+	background-position : -903px -168px;
+	background-repeat: no-repeat;
+}
+.pinkGhost{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	background-position:-303px -83px;
+	background-repeat: no-repeat;
+}
+.blueGhost{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	background-position:-503px -83px;
+	background-repeat: no-repeat;
+}
+.redGhost{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	background-position:-103px -83px;
+	background-repeat: no-repeat;
+}
+.orangeGhost{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	background-position:-703px -83px;
+	background-repeat: no-repeat;
 }
 .tile{
     width: 16px;
