@@ -421,12 +421,28 @@ const boardLayout1 = ()=>{
 const updatePostions = ()=>{
 	let proposedPosition;
 	let modifier;
+	const currentPosition =  document.querySelector(`tile${pacman.position}`);
 	if(pacman.lastdirection === "right"){
-		modifier =1;
-		proposedPosition = document.querySelector(`#tile${pacman.position +modifier}`);
+		
+		if(pacman.position === 419){
+			modifier =-27;
+			proposedPosition = document.querySelector(`#tile${pacman.position +modifier}`)
+
+		}else{
+			modifier =1;
+			proposedPosition = document.querySelector(`#tile${pacman.position +modifier}`);
+		}
+		
 	}else if(pacman.lastdirection === "left"){
-		modifier = -1;
-		proposedPosition = document.querySelector(`#tile${pacman.position +modifier}`);
+		if(pacman.position === 392){
+			modifier =+27;
+			proposedPosition = document.querySelector(`#tile${pacman.position +modifier}`)
+
+		}else{
+			modifier = -1;
+			proposedPosition = document.querySelector(`#tile${pacman.position +modifier}`);
+		}
+		
 		// proposedPosition.style.transform = "rotate(180deg)";
 	}else if(pacman.lastdirection === "up"){
 		modifier = -28;
@@ -439,25 +455,30 @@ const updatePostions = ()=>{
 	}
 	console.log(`#tile${proposedPosition}`);
 	if(proposedPosition.classList.contains("blocked")){
+		// document.querySelector(`#tile${pacman.position}`).classList.remove("pacman");
 
-		}else{
-			document.querySelector(`#tile${pacman.position}`).classList.remove("pacman");
+	}else{
+			document.querySelector(`#tile${pacman.position}`).classList.remove("pacman","left", "right", "up", "down");
 			
 			if(proposedPosition.classList.contains("pinkGhost") || proposedPosition.classList.contains("redGhost") || proposedPosition.classList.contains("orangeGhost") || proposedPosition.classList.contains("blueGhost")){
-
+				// currentPosition.classList.remove("pacman");
+				
+				pacman.position = pacman.spawn;
+				
+				document.querySelector(`#tile${pacman.spawn}`).classList.add("pacman", pacman.lastdirection);
 			}else if(proposedPosition.classList.contains("dot")){
 				score+=100;
 				proposedPosition.classList.remove("dot");
 				pacman.position = pacman.position+modifier;
-				proposedPosition.classList.add("pacman")
+				proposedPosition.classList.add("pacman", pacman.lastdirection)
 			}else if(proposedPosition.classList.contains("powerPellet")){
 				score+=200;
 				proposedPosition.classList.remove("powerPellet");
 				pacman.position = pacman.position+modifier;
-				proposedPosition.classList.add("pacman")
+				proposedPosition.classList.add("pacman", pacman.lastdirection)
 			}else{
 				pacman.position = pacman.position+modifier;
-				proposedPosition.classList.add("pacman")
+				proposedPosition.classList.add("pacman", pacman.lastdirection)
 			}
 
 	}
@@ -469,6 +490,7 @@ const init = ()=>{
 	playBoardElem.style.visibility ="hidden";
 	document.addEventListener("keydown",(event)=>{
 		console.log(event.key);
+		// const 
 		if(event.key === "ArrowRight" || event.key.toLowerCase() === "d"){
 			pacman.lastdirection = "right";
 		}else if(event.key === "ArrowLeft" || event.key.toLowerCase() === "a"){
@@ -479,7 +501,7 @@ const init = ()=>{
 			pacman.lastdirection = "up";
 		}
 	});
-	gameRun = setInterval(updatePostions, 1000);
+	gameRun = setInterval(updatePostions, 500);
 }
 
 setTiles();
