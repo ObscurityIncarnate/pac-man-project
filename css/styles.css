@@ -46,6 +46,41 @@ main{
 	background-position:-703px -83px;
 	background-repeat: no-repeat;
 }
+.pacman{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	background-position:-503px -337px;
+	background-repeat: no-repeat;
+    animation: pacmanIdle 1s steps(2) infinite;
+    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+}
+/* .pacman-left{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	background-position:-503px -337px;
+	background-repeat: no-repeat;
+    animation: pacmanIdle 1s steps(2) infinite;
+    transform: rotate(180deg);
+}
+.pacman-up{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	 background-position:-520px -337px; 
+    background-position:-503px -337px;
+	background-repeat: no-repeat;
+    animation: pacmanIdle 1s steps(2) infinite;
+    transform: rotate(270deg);
+}
+.pacman-down{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+    background-position:-503px -337px;
+	 background-position:-520px -337px; *
+	background-repeat: no-repeat;
+    animation: pacmanIdle 1s steps(2) infinite;
+    transform: rotate(90deg);
+} */
+/* @keyframes pacmanIdle {
+    from {background-position:-503px -337px;}
+    to {background-position:-503px -320px;}
+} */
+
 .tile{
     width: 16px;
     height: 16px;

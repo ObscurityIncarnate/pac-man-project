@@ -384,25 +384,29 @@ const boardLayout1 = ()=>{
 					tile.appendChild(divider)
 					tile.classList.add("blocked");
 				}
-				else if(index === 85 ||index ===110|| index === 645 || index === 669){
+				else if(index === 85 ||index ===110|| index === 645 || index === 670){
 					tile.classList.add("powerPellet");
 				}else if(index == 404){
-					pinkghost.spawn = 404;
-					pinkghost.position = 404;
+					pinkghost.spawn = index;
+					pinkghost.position = index;
 					tile.classList.add("pinkGhost")
 				}else if(index ==405){
-					blueghost.spawn =405;
-					blueghost.position =405;
+					blueghost.spawn =index;
+					blueghost.position = index;
 					tile.classList.add("blueGhost")
 				}else if(index == 406){
-					redghost.spawn = 406;
-					redghost.position = 406;
+					redghost.spawn = index;
+					redghost.position = index;
 					tile.classList.add("redGhost")
 					// ti
 				}else if(index == 407){
-					orangeghost.spawn = 407;
-					orangeghost.position =  407;
+					orangeghost.spawn = index;
+					orangeghost.position =  index;
 					tile.classList.add("orangeGhost")
+				}else if(index == 657){
+					pacman.spawn = index;
+					pacman.position = index;
+					tile.classList.add("pacman")
 				}else{
 						const dot = document.createElement("div");
 						tile.classList.add("dot")
@@ -412,6 +416,70 @@ const boardLayout1 = ()=>{
 			
 		// }
 	});
+}
+
+const updatePostions = ()=>{
+	let proposedPosition;
+	let modifier;
+	if(pacman.lastdirection === "right"){
+		modifier =1;
+		proposedPosition = document.querySelector(`#tile${pacman.position +modifier}`);
+	}else if(pacman.lastdirection === "left"){
+		modifier = -1;
+		proposedPosition = document.querySelector(`#tile${pacman.position +modifier}`);
+		// proposedPosition.style.transform = "rotate(180deg)";
+	}else if(pacman.lastdirection === "up"){
+		modifier = -28;
+		proposedPosition = document.querySelector(`#tile${pacman.position +modifier}`);
+		// proposedPosition.style.transform = "rotate(270deg)";
+	}else{
+		modifier = 28;
+		proposedPosition = document.querySelector(`#tile${pacman.position +modifier}`);
+		// proposedPosition.style.transform = "rotate(90deg)";
+	}
+	console.log(`#tile${proposedPosition}`);
+	if(proposedPosition.classList.contains("blocked")){
+
+		}else{
+			document.querySelector(`#tile${pacman.position}`).classList.remove("pacman");
+			
+			if(proposedPosition.classList.contains("pinkGhost") || proposedPosition.classList.contains("redGhost") || proposedPosition.classList.contains("orangeGhost") || proposedPosition.classList.contains("blueGhost")){
+
+			}else if(proposedPosition.classList.contains("dot")){
+				score+=100;
+				proposedPosition.classList.remove("dot");
+				pacman.position = pacman.position+modifier;
+				proposedPosition.classList.add("pacman")
+			}else if(proposedPosition.classList.contains("powerPellet")){
+				score+=200;
+				proposedPosition.classList.remove("powerPellet");
+				pacman.position = pacman.position+modifier;
+				proposedPosition.classList.add("pacman")
+			}else{
+				pacman.position = pacman.position+modifier;
+				proposedPosition.classList.add("pacman")
+			}
+
+	}
+}
+
+const init = ()=>{
+	prevBoardElem.style.visibility ="hidden";
+	nextBoardElem.style.visibility ="hidden";
+	playBoardElem.style.visibility ="hidden";
+	document.addEventListener("keydown",(event)=>{
+		console.log(event.key);
+		if(event.key === "ArrowRight" || event.key.toLowerCase() === "d"){
+			pacman.lastdirection = "right";
+		}else if(event.key === "ArrowLeft" || event.key.toLowerCase() === "a"){
+			pacman.lastdirection = "left";
+		}else if(event.key === "ArrowDown" || event.key.toLowerCase() === "s"){
+			pacman.lastdirection = "down";
+		}else if(event.key=== "ArrowUp" || event.key.toLowerCase() == "w"){
+			pacman.lastdirection = "up";
+		}
+	});
+	gameRun = setInterval(updatePostions, 1000);
 }
 
 setTiles();
@@ -427,7 +495,7 @@ prevBoardElem.addEventListener("click", ()=>{
 	boardSelector(currentboard);
 });
 playBoardElem.addEventListener("click", ()=>{
-
+	init();
 })
 
 // console.log(boardElement);
