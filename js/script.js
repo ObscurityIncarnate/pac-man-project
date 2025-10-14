@@ -3,7 +3,7 @@
 //boards
 //Constants
 const boardAmount =1;
-
+const cantPassThrough = ["blocked","redGhost", "blueGhost", "pinkGhost", "orangeGhost"]
 
 //Variables
 let userName;
@@ -14,24 +14,29 @@ let pacman = {
 	lives: null,
 	lastdirection: null,
 }
-let pinkghost = {
+let pinkGhost = {
 	position: null,
 	spawn: null,
+	target: null,
 };
-let blueghost = {
+let blueGhost = {
 	position: null,
 	spawn: null,
+	target: null,
 };
-let redghost = {
+let redGhost = {
 	position: null,
 	spawn: null,
+	target: null,
 };
-let orangeghost ={
+let orangeGhost ={
 	position: null,
 	spawn: null,
+	target: null,
 };
+let empowered;
 let gameRun;
-let timeelapsed;
+let beginChase;
 let pixels = [];
 let tunnelTiles;
 let emptyTiles;
@@ -394,21 +399,21 @@ const boardLayout1 = ()=>{
 				else if(index === 85 ||index ===110|| index === 645 || index === 670){
 					tile.classList.add("powerPellet");
 				}else if(index == 404){
-					pinkghost.spawn = index;
-					pinkghost.position = index;
+					pinkGhost.spawn = index;
+					pinkGhost.position = index;
 					tile.classList.add("pinkGhost")
 				}else if(index ==405){
-					blueghost.spawn =index;
-					blueghost.position = index;
+					blueGhost.spawn =index;
+					blueGhost.position = index;
 					tile.classList.add("blueGhost")
 				}else if(index == 406){
-					redghost.spawn = index;
-					redghost.position = index;
+					redGhost.spawn = index;
+					redGhost.position = index;
 					tile.classList.add("redGhost")
 					// ti
 				}else if(index == 407){
-					orangeghost.spawn = index;
-					orangeghost.position =  index;
+					orangeGhost.spawn = index;
+					orangeGhost.position =  index;
 					tile.classList.add("orangeGhost")
 				}else if(index == 657){
 					pacman.spawn = index;
@@ -424,8 +429,113 @@ const boardLayout1 = ()=>{
 		// }
 	});
 }
+const calculateDistance = (objectPosition, targetPosition)=>{
+	if(cantPassThrough.some( className => document.querySelector(`#tile${objectPosition}`).classList.contains(className))){
+		return null;
+	}else{
+		const xObjectComponent = objectPosition%28;
+		const yObjectComponent = Math.floor(objectPosition/28);
+		const xTargetComponent = targetPosition%28;
+		const yTargetComponent = Math.floor(targetPosition/28);
+
+		return Math.sqrt(((xObjectComponent-xTargetComponent)**2) + ((yObjectComponent-yTargetComponent)**2))
+	}
+}
+const ghostMoveCloser = (ghost, ghostname)=>{
+	if(beginChase){
+		const leftMove =  ghost.position -1;
+		const rightMove =  ghost.position +1;
+		const upMove =  ghost.position -28;
+		const downMove =  ghost.position +28;
+		const distanceArray = [];
+		distanceArray.push(calculateDistance(leftMove, ghost.target));
+		distanceArray.push(calculateDistance(rightMove, ghost.target ));
+		distanceArray.push(calculateDistance(upMove, ghost.target));
+		distanceArray.push(calculateDistance(downMove, ghost.target));
+		let direction;
+		if(!empowered){
+			let minDistance = Number.MAX_SAFE_INTEGER;
+			console.log(minDistance)
+			distanceArray.forEach((distance, index)=>{
+				if(distance !== null){
+					if(distance < minDistance){
+						minDistance = distance;
+						direction = index;
+					}
+				}
+			})
+			console.log(minDistance)
+		}else{
+			let maxDistance = Number.MIN_SAFE_INTEGER;
+			distanceArray.forEach((distance, index)=>{
+				if(distance !== null){
+					if(distance> maxDistance){
+						maxDistance = distance;
+						direction = index;
+					}
+				}
+			})
+		}
+		// console.log(ghost.constructor.name)
+		document.querySelector(`#tile${ghost.position}`).classList.remove(`${ghostname}`);
+		if(direction === 0){
+			ghost.position = leftMove;
+			document.querySelector(`#tile${ghost.position}`).classList.add(`${ghostname}`);
+			if(ghost.position === pacman.position){
+				loseLife()
+			}
+		}else if(direction === 1){
+			ghost.position = rightMove;
+			document.querySelector(`#tile${ghost.position}`).classList.add(`${ghostname}`);
+			if(ghost.position === pacman.position){
+				loseLife()
+			}
+		}else if(direction ===2){
+			ghost.position = upMove;
+			document.querySelector(`#tile${ghost.position}`).classList.add(`${ghostname}`);
+			if(ghost.position === pacman.position){
+				loseLife()
+			}
+		}else if(direction === 3){
+			ghost.position = downMove;
+			document.querySelector(`#tile${ghost.position}`).classList.add(`${ghostname}`);
+			if(ghost.position === pacman.position){
+				loseLife()
+			}
+		}else{
+			if(ghost.position === pacman.position){
+				loseLife()
+			}
+		}
+	}
+}
+
+const loseSequence = ()=>{
+	clearInterval(gameRun);
+	prevBoardElem.style.visibility ="visible";
+	nextBoardElem.style.visibility ="visible";
+	playBoardElem.style.visibility ="visible";
+}
+const loseLife = ()=>{
+
+	document.querySelector(`#tile${pacman.position}`).classList.remove("pacman", pacman.lastdirection);
+	pacman.lives -=1
+	if(pacman.lives <=0){
+		loseSequence()
+	}
+	pacman.position = pacman.spawn;
+	document.querySelector(`#tile${pacman.spawn}`).classList.add("pacman", pacman.lastdirection);
+}
 const playGame = ()=>{
 	updatePostion();
+	redGhost.target = pacman.position;
+	blueGhost.target = pacman.position;
+	pinkGhost.target = pacman.position;
+	orangeGhost.target = pacman.position;
+	ghostMoveCloser(redGhost, "redGhost");
+	ghostMoveCloser(blueGhost, "blueGhost");
+	ghostMoveCloser(pinkGhost, "pinkGhost");
+	ghostMoveCloser(orangeGhost, "orangeGhost");
 	scoreElem.textContent = score;
 	livesElem.textContent = `x${pacman.lives}`
 }
@@ -488,10 +598,7 @@ const updatePostion = ()=>{
 			
 			if(proposedPosition.classList.contains("pinkGhost") || proposedPosition.classList.contains("redGhost") || proposedPosition.classList.contains("orangeGhost") || proposedPosition.classList.contains("blueGhost")){
 				// currentPosition.classList.remove("pacman");
-				pacman.lives -=1
-				pacman.position = pacman.spawn;
-				
-				document.querySelector(`#tile${pacman.spawn}`).classList.add("pacman", pacman.lastdirection);
+				loseLife()
 			}else if(proposedPosition.classList.contains("dot")){
 				score+=10;
 				proposedPosition.classList.remove("dot");
@@ -517,6 +624,7 @@ const init = ()=>{
 	pacman.position = pacman.spawn;
 	pacman.lives = 3;
 	score = 0;
+	beginChase = false;
 	document.addEventListener("keydown",(event)=>{
 		console.log(event.key);
 		// const 
@@ -530,6 +638,7 @@ const init = ()=>{
 			pacman.lastdirection = "up";
 		}
 	});
+	setTimeout(()=>{beginChase =true},3000);
 	gameRun = setInterval(playGame, 500);
 }
 
