@@ -425,7 +425,7 @@ const boardLayout1 = ()=>{
 const updatePostions = ()=>{
 	let proposedPosition;
 	let modifier;
-	const currentPosition =  document.querySelector(`tile${pacman.position}`);
+	const currentPosition =  document.querySelector(`#tile${pacman.position}`);
 	console.log(pacman.position)
 	if(pacman.lastdirection === "right"){
 		
@@ -473,9 +473,11 @@ const updatePostions = ()=>{
 	console.log(`#tile${proposedPosition}`);
 	if(proposedPosition.classList.contains("blocked")){
 		// document.querySelector(`#tile${pacman.position}`).classList.remove("pacman");
-
+		currentPosition.classList.remove("left", "right", "up", "down");
+		currentPosition.classList.add(pacman.lastdirection);
+		// currentPosition.style.
 	}else{
-			document.querySelector(`#tile${pacman.position}`).classList.remove("pacman","left", "right", "up", "down");
+			currentPosition.classList.remove("pacman","left", "right", "up", "down");
 			
 			if(proposedPosition.classList.contains("pinkGhost") || proposedPosition.classList.contains("redGhost") || proposedPosition.classList.contains("orangeGhost") || proposedPosition.classList.contains("blueGhost")){
 				// currentPosition.classList.remove("pacman");
