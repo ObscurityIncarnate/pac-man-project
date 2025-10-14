@@ -50,7 +50,7 @@ main{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
 	background-position:-503px -337px;
 	background-repeat: no-repeat;
-    animation: pacmanIdle 1s steps(2) infinite ;
+    animation: pacmanIdle 0.2s steps(2) infinite ;
     /* animation: name duration timing-function delay iteration-count direction fill-mode; */
 }
 .right{

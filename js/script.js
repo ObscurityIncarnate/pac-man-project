@@ -33,6 +33,9 @@ let orangeghost ={
 let gameRun;
 let timeelapsed;
 let pixels = [];
+let tunnelTiles;
+let emptyTiles;
+let boardSize = 868;
 let imageLocation = "url('../assets/Pac-Man - All Assets_Palettes.png')";
 //Cached Document Elements
 const boardElement = document.querySelector("#display-board");
@@ -42,7 +45,7 @@ const prevBoardElem =  document.querySelector("#previousBoard");
 const playBoardElem =  document.querySelector("#playBoard")
 //Functions
 const setTiles= ()=>{
-for(let i=0; i<868; i++){
+for(let i=0; i<boardSize; i++){
     const tile = document.createElement("div");
     tile.id= `tile${i}`;
     tile.classList.add("tile");
@@ -64,7 +67,7 @@ const boardLayout1 = ()=>{
 	const tiles = document.querySelectorAll(".tile");
 	//verticalDoubleLinesFlexEnd 
 	const  verticalDoubleLines = pixels.filter((pixel) =>{
-		return (pixel%28===0 ||pixel%28===27 ||[58, 86, 114, ].includes(pixel)) && ![308, 336, 364, 392, 448, 476, 335, 363, 391, 419,420,447, 475, 503, 531].includes(pixel);
+		return (pixel%28===0 ||pixel%28===27 ||[58, 86, 114, ].includes(pixel)) && ![308, 336, 364, 448, 476, 335, 363, 391,420,447, 475, 503, 531].includes(pixel);
 	} ).concat([
 		// 313, 341, 369, 330, 358, 386, 453, 481, 509, 498, 526,
 		285, 313, 341, 302, 330, 358, 453, 481, 470, 498, 509,526,
@@ -158,7 +161,8 @@ const boardLayout1 = ()=>{
 		801, 802, 803, 804, 805, 806, 807, 808
 	]
 	 
-	const emptyTiles = [
+	tunnelTiles=[392, 419]
+	emptyTiles = [
 		//left
 		87, 88,
 		92,93, 94,
@@ -278,7 +282,7 @@ const boardLayout1 = ()=>{
 		tile.removeAttribute("class");
 		tile.classList.add("tile");
 			//looping paths
-			if(!(emptyTiles.includes(index))){
+			if(!(emptyTiles.includes(index) || tunnelTiles.includes(index))){
 				const divider = document.createElement("div");
 				//vertical dividers
 				if(leftCornerDouble.includes(index) || rightCornerDouble.includes(index)|| bottomLeftCornerDouble.includes(index) || bottomRightCornerDouble.includes(index)){
@@ -422,35 +426,48 @@ const updatePostions = ()=>{
 	let proposedPosition;
 	let modifier;
 	const currentPosition =  document.querySelector(`tile${pacman.position}`);
+	console.log(pacman.position)
 	if(pacman.lastdirection === "right"){
 		
-		if(pacman.position === 419){
+		if(tunnelTiles.includes(pacman.position) && document.querySelector(`#tile${pacman.position+1}`).classList.contains("blocked")){
 			modifier =-27;
-			proposedPosition = document.querySelector(`#tile${pacman.position +modifier}`)
+			proposedPosition = document.querySelector(`#tile${(pacman.position+modifier)%boardSize}`)
 
 		}else{
 			modifier =1;
-			proposedPosition = document.querySelector(`#tile${pacman.position +modifier}`);
+			proposedPosition = document.querySelector(`#tile${(pacman.position+modifier)%boardSize}`);
 		}
 		
 	}else if(pacman.lastdirection === "left"){
-		if(pacman.position === 392){
+		if( tunnelTiles.includes(pacman.position) && document.querySelector(`#tile${pacman.position-1}`).classList.contains("blocked")){
 			modifier =+27;
-			proposedPosition = document.querySelector(`#tile${pacman.position +modifier}`)
+			proposedPosition = document.querySelector(`#tile${(pacman.position+modifier)%boardSize}`)
 
 		}else{
 			modifier = -1;
-			proposedPosition = document.querySelector(`#tile${pacman.position +modifier}`);
+			proposedPosition = document.querySelector(`#tile${(pacman.position+modifier)%boardSize}`);
 		}
 		
 		// proposedPosition.style.transform = "rotate(180deg)";
 	}else if(pacman.lastdirection === "up"){
-		modifier = -28;
-		proposedPosition = document.querySelector(`#tile${pacman.position +modifier}`);
+		if(tunnelTiles.includes(pacman.position) && document.querySelector(`#tile${pacman.position-28}`).classList.contains("blocked")){
+			modifier = -boardSize;
+			proposedPosition = document.querySelector(`#tile${(pacman.position+modifier)%boardSize}`);
+
+		}else{
+			modifier = -28;
+			proposedPosition = document.querySelector(`#tile${(pacman.position+modifier)%boardSize}`);
+		}
+		
 		// proposedPosition.style.transform = "rotate(270deg)";
 	}else{
-		modifier = 28;
-		proposedPosition = document.querySelector(`#tile${pacman.position +modifier}`);
+		if(tunnelTiles.includes(pacman.position) && document.querySelector(`#tile${pacman.position+28}`).classList.contains("blocked")){
+			modifier = boardSize;
+			proposedPosition = document.querySelector(`#tile${(pacman.position+modifier)%boardSize}`);
+		}else{
+			modifier = 28;
+			proposedPosition = document.querySelector(`#tile${(pacman.position+modifier)%boardSize}`);
+		}
 		// proposedPosition.style.transform = "rotate(90deg)";
 	}
 	console.log(`#tile${proposedPosition}`);
