@@ -11,8 +11,24 @@ body{
 }
 main{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+#info{
+    display:  flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 448px;
+    margin-bottom: 10px;
+    pointer-events: none;
+    /* width:  700px; */
+}
+#health-Bar{
+    display:  flex;
+    pointer-events:  none;
+    /* flex-direction: row; */
 }
 .dot div{
     width: 8px;
@@ -100,6 +116,7 @@ main{
     display: flex;
     align-items: center;
     justify-content: center;
+    
 }
 .blocked{
     /* border: 2px double blue; */
@@ -111,5 +128,6 @@ main{
 }
 #display-board{
     display: grid;
+    
 
 }

@@ -42,7 +42,10 @@ const boardElement = document.querySelector("#display-board");
 const mainElement = document.querySelector("main");
 const nextBoardElem =  document.querySelector("#nextBoard");
 const prevBoardElem =  document.querySelector("#previousBoard");
-const playBoardElem =  document.querySelector("#playBoard")
+const playBoardElem =  document.querySelector("#playBoard");
+const scoreElem  =  document.querySelector("#score");
+const livesElem =  document.querySelector("#lives");
+
 //Functions
 const setTiles= ()=>{
 for(let i=0; i<boardSize; i++){
@@ -421,8 +424,12 @@ const boardLayout1 = ()=>{
 		// }
 	});
 }
-
-const updatePostions = ()=>{
+const playGame = ()=>{
+	updatePostion();
+	scoreElem.textContent = score;
+	livesElem.textContent = `x${pacman.lives}`
+}
+const updatePostion = ()=>{
 	let proposedPosition;
 	let modifier;
 	const currentPosition =  document.querySelector(`#tile${pacman.position}`);
@@ -481,17 +488,17 @@ const updatePostions = ()=>{
 			
 			if(proposedPosition.classList.contains("pinkGhost") || proposedPosition.classList.contains("redGhost") || proposedPosition.classList.contains("orangeGhost") || proposedPosition.classList.contains("blueGhost")){
 				// currentPosition.classList.remove("pacman");
-				
+				pacman.lives -=1
 				pacman.position = pacman.spawn;
 				
 				document.querySelector(`#tile${pacman.spawn}`).classList.add("pacman", pacman.lastdirection);
 			}else if(proposedPosition.classList.contains("dot")){
-				score+=100;
+				score+=10;
 				proposedPosition.classList.remove("dot");
 				pacman.position = pacman.position+modifier;
 				proposedPosition.classList.add("pacman", pacman.lastdirection)
 			}else if(proposedPosition.classList.contains("powerPellet")){
-				score+=200;
+				score+=50;
 				proposedPosition.classList.remove("powerPellet");
 				pacman.position = pacman.position+modifier;
 				proposedPosition.classList.add("pacman", pacman.lastdirection)
@@ -507,6 +514,9 @@ const init = ()=>{
 	prevBoardElem.style.visibility ="hidden";
 	nextBoardElem.style.visibility ="hidden";
 	playBoardElem.style.visibility ="hidden";
+	pacman.position = pacman.spawn;
+	pacman.lives = 3;
+	score = 0;
 	document.addEventListener("keydown",(event)=>{
 		console.log(event.key);
 		// const 
@@ -520,7 +530,7 @@ const init = ()=>{
 			pacman.lastdirection = "up";
 		}
 	});
-	gameRun = setInterval(updatePostions, 500);
+	gameRun = setInterval(playGame, 500);
 }
 
 setTiles();
