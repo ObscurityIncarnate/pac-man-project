@@ -625,6 +625,7 @@ const init = ()=>{
 	pacman.lives = 3;
 	score = 0;
 	beginChase = false;
+	boardSelector(0);
 	document.addEventListener("keydown",(event)=>{
 		console.log(event.key);
 		// const 
