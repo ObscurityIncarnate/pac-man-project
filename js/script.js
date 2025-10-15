@@ -49,7 +49,7 @@ let pixels = [];
 let tunnelTiles;
 let emptyTiles;
 let boardSize = 868;
-let imageLocation = "url('../assets/Pac-Man - All Assets_Palettes.png')";
+let imageLocation = "url('../assets/Arcade - Pac-Man - Map.PNG')";
 //Cached Document Elements
 const boardElement = document.querySelector("#display-board");
 const mainElement = document.querySelector("main");
@@ -282,10 +282,10 @@ const boardLayout1 = ()=>{
 		// 679, 680,
 		// 707, 708,
 		// 758,767,
-		758, 767,
-		707, 708,
+		// 758, 767,
+		// 707, 708,
 		735, 736,
-		786, 795,
+		// 786, 795,
 		//bottom t under ghost spawn and other t
 		// 654, 661, 682, 689, 685, 686, 713, 714, 741, 742, 769, 770
 		682, 689, 710, 717, 713, 714, 741, 742, 769, 770, 797, 798,
@@ -296,14 +296,20 @@ const boardLayout1 = ()=>{
 		800, 809
 
 	];
-	const leftCornerDouble =[0, 274, 442, 532];
-	const rightCornerDouble  = [27, 257, 425, 559];
-	const bottomLeftCornerDouble  = [252, 386, 554, 840];
-	const bottomRightCornerDouble  = [279, 369, 537, 867];
+	const leftCornerDouble =[0, 274, 374, 442, 532, ];
+	const rightCornerDouble  = [27, 257, 381, 425, 559];
+	const bottomLeftCornerDouble  = [252, 386, 430, 554, 840];
+	const bottomRightCornerDouble  = [279, 369, 437, 537, 867];
+
+	const leftCornerSingle =[58, 63, 72, 78, 170, 175, 178, 187, 190, 210, 268 ,288, 427, 439, 514, 546, 590, 595, 604, 610, 639, 682, 697, 707, 714, 719, 758, 772];
+	const rightCornerSingle  = [61, 67, 76, 81, 173, 176, 185,188, 193,209, 263, 299, 428, 440, 521, 545, 593, 620, 599, 608, 613, 689, 674,708, 713, 720, 767, 781];
+	const bottomLeftCornerSingle  = [114, 119, 125, 128, 134, 198, 206, 218,260,293, 296, 371, 383, 539, 542, 551,618, 623, 629, 632, 704,710,722, 725, 764, 776, 786, 797, 800];
+	const bottomRightCornerSingle  = [117, 123, 126, 132, 137, 201, 213, 221, 271, 291, 294, 372, 384, 540, 549, 552, 627, 630, 636,641,702,705, 717, 723, 763, 775, 795,798,809];
 	tiles.forEach((tile, index)=>{
 		// console.log(index);
 		tile.removeAttribute("class");
 		tile.classList.add("tile");
+		
 			//looping paths
 			if(!(emptyTiles.includes(index) || tunnelTiles.includes(index))){
 				const divider = document.createElement("div");
@@ -311,59 +317,70 @@ const boardLayout1 = ()=>{
 				if(leftCornerDouble.includes(index) || rightCornerDouble.includes(index)|| bottomLeftCornerDouble.includes(index) || bottomRightCornerDouble.includes(index)){
 					const smallerCorner =document.createElement("div");
 					// console.log("here")
-					
+					// tile.style.backgroundImage = imageLocation;
 					if(leftCornerDouble.includes(index)){
-						divider.style.borderTop = "1px solid blue";
-						smallerCorner.style.borderTop = "1px solid blue";
-						divider.style.borderLeft ="1px solid blue";
-						smallerCorner.style.borderLeft ="1px solid blue";
-						tile.style.justifyContent = "flex-end";
-						tile.style.alignItems= "flex-end";
-						divider.style.borderTopLeftRadius = "3px";
-						smallerCorner.style.height="5px";
-						smallerCorner.style.width = "6px";
-						divider.style.height = "9px";
-						divider.style.width ="10px";
-						smallerCorner.style.borderTopLeftRadius = "3px";
+						tile.style.backgroundImage = imageLocation;
+						tile.style.backgroundPosition ="0px -148px";
+						// divider.style.borderTop = "1px solid blue";
+						// smallerCorner.style.borderTop = "1px solid blue";
+						// divider.style.borderLeft ="1px solid blue";
+						// smallerCorner.style.borderLeft ="1px solid blue";
+						// tile.style.justifyContent = "flex-end";
+						// tile.style.alignItems= "flex-end";
+						// divider.style.borderTopLeftRadius = "3px";
+						// smallerCorner.style.height="5px";
+						// smallerCorner.style.width = "6px";
+						// divider.style.height = "9px";
+						// divider.style.width ="10px";
+						// smallerCorner.style.borderTopLeftRadius = "3px";
 					}else if(rightCornerDouble.includes(index)){
-						divider.style.borderTop = "1px solid blue";
-						smallerCorner.style.borderTop = "1px solid blue";
-						divider.style.borderRight ="1px solid blue";
-						smallerCorner.style.borderRight = "1px solid blue";
-						divider.style.borderTopRightRadius = "3px";
-						smallerCorner.style.borderTopRightRadius = "3px";
-						smallerCorner.style.height="5px";
-						smallerCorner.style.width = "5px"
-						divider.style.height = "9px";
-						divider.style.width ="9px";
-						tile.style.justifyContent= "flex-start";
-						tile.style.alignItems= "flex-end";
+						tile.style.backgroundImage = imageLocation;
+						tile.style.backgroundRepeat = "no-repeat";
+						tile.style.backgroundPosition ="-220px -148px";
+						// divider.style.borderTop = "1px solid blue";
+						// smallerCorner.style.borderTop = "1px solid blue";
+						// divider.style.borderRight ="1px solid blue";
+						// smallerCorner.style.borderRight = "1px solid blue";
+						// divider.style.borderTopRightRadius = "3px";
+						// smallerCorner.style.borderTopRightRadius = "3px";
+						// smallerCorner.style.height="5px";
+						// smallerCorner.style.width = "5px"
+						// divider.style.height = "9px";
+						// divider.style.width ="9px";
+						// tile.style.justifyContent= "flex-start";
+						// tile.style.alignItems= "flex-end";
 					}else if(bottomLeftCornerDouble.includes(index)){
-						divider.style.borderBottom = "1px solid blue";
-						smallerCorner.style.borderBottom = "1px solid blue";
-						divider.style.borderLeft ="1px solid blue";
-						smallerCorner.style.borderLeft ="1px solid blue";
-						smallerCorner.style.height="6px";
-						smallerCorner.style.width = "6px";
-						divider.style.height = "10px";
-						divider.style.width ="10px";
-						divider.style.borderBottomLeftRadius = "3px";
-						smallerCorner.style.borderBottomLeftRadius = "3px";
-						tile.style.alignItems= "flex-start";
-						tile.style.justifyContent = "flex-end";
+						tile.style.backgroundImage = imageLocation;
+						tile.style.backgroundRepeat = "no-repeat";
+						tile.style.backgroundPosition ="-0px -240px";
+						// divider.style.borderBottom = "1px solid blue";
+						// smallerCorner.style.borderBottom = "1px solid blue";
+						// divider.style.borderLeft ="1px solid blue";
+						// smallerCorner.style.borderLeft ="1px solid blue";
+						// smallerCorner.style.height="6px";
+						// smallerCorner.style.width = "6px";
+						// divider.style.height = "10px";
+						// divider.style.width ="10px";
+						// divider.style.borderBottomLeftRadius = "3px";
+						// smallerCorner.style.borderBottomLeftRadius = "3px";
+						// tile.style.alignItems= "flex-start";
+						// tile.style.justifyContent = "flex-end";
 					}else{
-						divider.style.borderBottom = "1px solid blue";
-						smallerCorner.style.borderBottom = "1px solid blue";
-						divider.style.borderRight ="1px solid blue";
-						smallerCorner.style.borderRight = "1px solid blue";
-						divider.style.borderBottomRightRadius = "3px";
-						smallerCorner.style.borderBottomRightRadius = "3px";
-						smallerCorner.style.height="6px";
-						smallerCorner.style.width = "5px"
-						divider.style.height = "10px";
-						divider.style.width ="9px";
-						tile.style.justifyContent= "flex-start";
-						tile.style.alignItems= "flex-start";
+						// divider.style.borderBottom = "1px solid blue";
+						// smallerCorner.style.borderBottom = "1px solid blue";
+						// divider.style.borderRight ="1px solid blue";
+						// smallerCorner.style.borderRight = "1px solid blue";
+						// divider.style.borderBottomRightRadius = "3px";
+						// smallerCorner.style.borderBottomRightRadius = "3px";
+						// smallerCorner.style.height="6px";
+						// smallerCorner.style.width = "5px"
+						// divider.style.height = "10px";
+						// divider.style.width ="9px";
+						// tile.style.justifyContent= "flex-start";
+						// tile.style.alignItems= "flex-start";
+						tile.style.backgroundRepeat = "no-repeat";
+						tile.style.backgroundImage = imageLocation;
+						tile.style.backgroundPosition ="-220px -240px";
 					}
 					
 					
@@ -385,28 +402,89 @@ const boardLayout1 = ()=>{
 					tile.classList.add("blocked");
 					
 					
+				}else if(leftCornerSingle.includes(index) || rightCornerSingle.includes(index) || bottomLeftCornerSingle.includes(index) || bottomRightCornerSingle.includes(index)){
+					const divider = document.createElement("div");
+					if(leftCornerSingle.includes(index)){
+						// divider.style.borderTop = "1px solid blue";
+						// divider.style.borderLeft ="1px solid blue";
+						// tile.style.justifyContent = "flex-end";
+						// tile.style.alignItems= "flex-end";
+						// divider.style.borderTopLeftRadius = "3px";
+						// divider.style.height = "8px";
+						// divider.style.width ="8px";
+						tile.style.backgroundRepeat = "no-repeat";
+						tile.style.backgroundImage = imageLocation;
+						tile.style.backgroundPosition ="-14px -12px";
+					}else if(rightCornerSingle.includes(index)){
+						tile.style.backgroundRepeat = "no-repeat";
+						tile.style.backgroundImage = imageLocation;
+						tile.style.backgroundPosition ="-37px -12px";
+						// divider.style.borderTop = "1px solid blue";
+						// divider.style.borderRight ="1px solid blue";
+						// tile.style.justifyContent = "flex-start";
+						// tile.style.alignItems= "flex-end";
+						// divider.style.borderTopRightRadius = "3px";
+						// divider.style.height = "8px";
+						// divider.style.width ="8px";
+					}else if(bottomLeftCornerSingle.includes(index)){
+						tile.style.backgroundRepeat = "no-repeat";
+						tile.style.backgroundImage = imageLocation;
+						tile.style.backgroundPosition ="-14px -27px";
+						// divider.style.borderBottom = "1px solid blue";
+						// divider.style.borderLeft ="1px solid blue";
+						// tile.style.justifyContent = "flex-end";
+						// tile.style.alignItems= "flex-start";
+						// divider.style.borderBottomLeftRadius = "3px";
+						// divider.style.height = "8px";
+						// divider.style.width ="8px";
+					}else if(bottomRightCornerSingle.includes(index)){
+						// divider.style.borderBottom = "1px solid blue";
+						// divider.style.borderRight ="1px solid blue";
+						// tile.style.justifyContent = "flex-start";
+						// tile.style.alignItems= "flex-start";
+						// divider.style.borderBottomRightRadius = "3px";
+						// divider.style.height = "8px";
+						// divider.style.width ="8px";
+						tile.style.backgroundRepeat = "no-repeat";
+						tile.style.backgroundImage = imageLocation;
+						tile.style.backgroundPosition ="-37px -27px";
+					}
+					tile.appendChild(divider);
+					tile.classList.add("blocked");
 				}else if(verticalDoubleLines.includes(index) ||verticalSingleLines.includes(index)){
 					if(verticalSingleLines.includes(index)){
-						divider.style.borderLeft = "1px solid blue";
-						tile.style.justifyContent= "center"
-						divider.style.height ="inherit";
+						// divider.style.borderLeft = "1px solid blue";
+						// tile.style.justifyContent= "center"
+						// divider.style.height ="inherit";
+						tile.style.backgroundRepeat = "no-repeat";
+						tile.style.backgroundImage = imageLocation;
+						tile.style.backgroundPosition ="-54px -54px";
 					}else {
-						divider.style.borderLeft = "1px solid blue";
-						divider.style.borderRight = "1px solid blue";
-						divider.style.height ="inherit";
-						divider.style.width = "3px";
+						// divider.style.borderLeft = "1px solid blue";
+						// divider.style.borderRight = "1px solid blue";
+						// divider.style.height ="inherit";
+						// divider.style.width = "3px";
+						tile.style.backgroundImage = imageLocation;
+						tile.style.backgroundPosition ="0px 40px";
+						
+						
 					}
 					tile.appendChild(divider)
 					tile.classList.add("blocked");
 				}else if( horizontalDoubleLines.includes(index) || horizontalSingleLines.includes(index)){
 					if(horizontalSingleLines.includes(index)){
-						divider.style.borderTop="1px solid blue";
-						divider.style.width = "inherit";
+						// divider.style.borderTop="1px solid blue";
+						// divider.style.width = "inherit";
+						tile.style.backgroundRepeat = "no-repeat";
+						tile.style.backgroundImage = imageLocation;
+						tile.style.backgroundPosition ="-28px -12px";
 					}else{
-						divider.style.borderTop="1px solid blue";
-						divider.style.borderBottom ="1px solid blue";
-						divider.style.height = "3px";
-						divider.style.width = "inherit";
+						// divider.style.borderTop="1px solid blue";
+						// divider.style.borderBottom ="1px solid blue";
+						// divider.style.height = "3px";
+						// divider.style.width = "inherit";
+						tile.style.backgroundImage = imageLocation;
+						tile.style.backgroundPosition ="-430px -72px"
 					}
 					tile.appendChild(divider)
 					tile.classList.add("blocked");
@@ -494,8 +572,9 @@ const ghostMoveCloser = (ghost, ghostname)=>{
 		// console.log(ghost.constructor.name)
 		console.log(direction)
 		console.log(`${ghostname}${direction}, and the position ${ghost.position}`)
-		document.querySelector(`#tile${ghost.position}`).classList.remove(`${ghostname}${ghost.animation}`);
-		if(direction === 0){
+		if(direction){
+			document.querySelector(`#tile${ghost.position}`).classList.remove(`${ghostname}${ghost.animation}`);
+			if(direction === 0){
 			ghost.position = leftMove;
 			const newPosition = document.querySelector(`#tile${ghost.position}`);
 			// newPosition.classList.add(`${ghostname}`);
@@ -527,7 +606,7 @@ const ghostMoveCloser = (ghost, ghostname)=>{
 			if(!empowered){
 				ghost.animation = "Right";
 				// newPosition.style.animation = `${ghostname}Right 0.4s steps(2) infinite;`;
-				console.log
+				// console.log
 				newPosition.classList.add(`${ghostname}${ghost.animation}`);
 				if(ghost.position === pacman.position){
 					loseLife();
@@ -583,6 +662,97 @@ const ghostMoveCloser = (ghost, ghostname)=>{
 				}
 			}
 			
+		}
+			if(direction === 0){
+				ghost.position = leftMove;
+				const newPosition = document.querySelector(`#tile${ghost.position}`);
+				// newPosition.classList.add(`${ghostname}`);
+				if(!empowered){
+					ghost.animation = "Left";
+					// newPosition.style.animation = `${ghostname}Left 0.4s steps(2) infinite;`;
+					newPosition.classList.add(`${ghostname}${ghost.animation}`);
+					if(ghost.position === pacman.position){
+						loseLife();
+					}
+					// else{
+					// 	newPosition.classList.add(`${ghostname}${ghost.animation}`);
+					// }
+				}else{
+					// newPosition.style.animation = `${ghostname}Scared 0.4s steps(2) infinite;`
+					// newPosition.classList.add(`${ghostname}${ghost.animation}`);
+					if(ghost.position === pacman.position){
+						score+=200;
+					}else{
+						ghost.animation  = "Scared";
+						newPosition.classList.add(`${ghostname}${ghost.animation}`);
+					}
+				}
+				
+			}else if(direction === 1){
+				ghost.position = rightMove;
+				const newPosition = document.querySelector(`#tile${ghost.position}`);
+				// newPosition.classList.add(`${ghostname}`);
+				if(!empowered){
+					ghost.animation = "Right";
+					// newPosition.style.animation = `${ghostname}Right 0.4s steps(2) infinite;`;
+					// console.log
+					newPosition.classList.add(`${ghostname}${ghost.animation}`);
+					if(ghost.position === pacman.position){
+						loseLife();
+					}
+				}else{
+					// newPosition.style.animation = `${ghostname}Scared 0.4s steps(2) infinite;`
+					// newPosition.classList.add(`${ghostname}${ghost.animation}`);
+					if(ghost.position === pacman.position){
+						score+=200;
+					}else{
+						ghost.animation  = "Scared";
+						newPosition.classList.add(`${ghostname}${ghost.animation}`);
+					}
+				}
+				
+			}else if(direction ===2){
+				ghost.position = upMove;
+				const newPosition = document.querySelector(`#tile${ghost.position}`)
+				// newPosition.classList.add(`${ghostname}`);
+				if(!empowered){
+					// newPosition.style.animation = `${ghostname}Up 0.4s steps(2) infinite;`;
+					ghost.animation = "Up";
+					newPosition.classList.add(`${ghostname}${ghost.animation}`);
+					if(ghost.position === pacman.position){
+						loseLife();
+					}
+				}else{
+					if(ghost.position === pacman.position){
+						score+=200;
+					}else{
+						ghost.animation  = "Scared";
+						newPosition.classList.add(`${ghostname}${ghost.animation}`);
+					}
+				}
+				
+			}else if(direction === 3){
+				ghost.position = downMove;
+				const newPosition = document.querySelector(`#tile${ghost.position}`)
+				// newPosition.classList.add(`${ghostname}`);
+				if(!empowered){
+					ghost.animation = "Down";
+					newPosition.classList.add(`${ghostname}${ghost.animation}`);
+					// newPosition.style.animation = `${ghostname}Down 0.4s steps(2) infinite;`;
+					if(ghost.position === pacman.position){
+						loseLife();
+					}
+				}else{
+					if(ghost.position === pacman.position){
+						score+=200;
+						ghost.position = ghost.spawn;
+					}else{
+						ghost.animation  = "Scared";
+						newPosition.classList.add(`${ghostname}${ghost.animation}`);
+					}
+				}
+				
+			}
 		}else{
 			if(ghost.position === pacman.position){
 				loseLife()
