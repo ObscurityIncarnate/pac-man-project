@@ -313,13 +313,15 @@ const boardLayout1 = ()=>{
 			//looping paths
 			if(!(emptyTiles.includes(index) || tunnelTiles.includes(index))){
 				const divider = document.createElement("div");
+				
 				//vertical dividers
 				if(leftCornerDouble.includes(index) || rightCornerDouble.includes(index)|| bottomLeftCornerDouble.includes(index) || bottomRightCornerDouble.includes(index)){
-					const smallerCorner =document.createElement("div");
+					// const smallerCorner =document.createElement("div");
+						tile.style.backgroundRepeat = "no-repeat";
+						tile.style.backgroundImage = imageLocation;
 					// console.log("here")
 					// tile.style.backgroundImage = imageLocation;
 					if(leftCornerDouble.includes(index)){
-						tile.style.backgroundImage = imageLocation;
 						tile.style.backgroundPosition ="0px -148px";
 						// divider.style.borderTop = "1px solid blue";
 						// smallerCorner.style.borderTop = "1px solid blue";
@@ -334,8 +336,6 @@ const boardLayout1 = ()=>{
 						// divider.style.width ="10px";
 						// smallerCorner.style.borderTopLeftRadius = "3px";
 					}else if(rightCornerDouble.includes(index)){
-						tile.style.backgroundImage = imageLocation;
-						tile.style.backgroundRepeat = "no-repeat";
 						tile.style.backgroundPosition ="-220px -148px";
 						// divider.style.borderTop = "1px solid blue";
 						// smallerCorner.style.borderTop = "1px solid blue";
@@ -350,8 +350,7 @@ const boardLayout1 = ()=>{
 						// tile.style.justifyContent= "flex-start";
 						// tile.style.alignItems= "flex-end";
 					}else if(bottomLeftCornerDouble.includes(index)){
-						tile.style.backgroundImage = imageLocation;
-						tile.style.backgroundRepeat = "no-repeat";
+
 						tile.style.backgroundPosition ="-0px -240px";
 						// divider.style.borderBottom = "1px solid blue";
 						// smallerCorner.style.borderBottom = "1px solid blue";
@@ -378,8 +377,6 @@ const boardLayout1 = ()=>{
 						// divider.style.width ="9px";
 						// tile.style.justifyContent= "flex-start";
 						// tile.style.alignItems= "flex-start";
-						tile.style.backgroundRepeat = "no-repeat";
-						tile.style.backgroundImage = imageLocation;
 						tile.style.backgroundPosition ="-220px -240px";
 					}
 					
@@ -392,18 +389,20 @@ const boardLayout1 = ()=>{
 					// divider.style.transform= "translate(-50%, -50%)";
 					// divider.style.borderRadius = "2px"
 					
-					divider.style.zIndex = "0"
+					// divider.style.zIndex = "0"
 					
-					smallerCorner.style.zIndex = "1"
+					// smallerCorner.style.zIndex = "1"
 					// divider.style.width = "3px";
-					tile.appendChild(divider);
-					divider.style.position = "absolute";
-					tile.appendChild(smallerCorner);
+					// tile.appendChild(divider);
+					// divider.style.position = "absolute";
+					// tile.appendChild(smallerCorner);
 					tile.classList.add("blocked");
 					
 					
 				}else if(leftCornerSingle.includes(index) || rightCornerSingle.includes(index) || bottomLeftCornerSingle.includes(index) || bottomRightCornerSingle.includes(index)){
-					const divider = document.createElement("div");
+					// const divider = document.createElement("div");
+					tile.style.backgroundRepeat = "no-repeat";
+					tile.style.backgroundImage = imageLocation;
 					if(leftCornerSingle.includes(index)){
 						// divider.style.borderTop = "1px solid blue";
 						// divider.style.borderLeft ="1px solid blue";
@@ -412,12 +411,8 @@ const boardLayout1 = ()=>{
 						// divider.style.borderTopLeftRadius = "3px";
 						// divider.style.height = "8px";
 						// divider.style.width ="8px";
-						tile.style.backgroundRepeat = "no-repeat";
-						tile.style.backgroundImage = imageLocation;
 						tile.style.backgroundPosition ="-14px -12px";
 					}else if(rightCornerSingle.includes(index)){
-						tile.style.backgroundRepeat = "no-repeat";
-						tile.style.backgroundImage = imageLocation;
 						tile.style.backgroundPosition ="-37px -12px";
 						// divider.style.borderTop = "1px solid blue";
 						// divider.style.borderRight ="1px solid blue";
@@ -427,8 +422,8 @@ const boardLayout1 = ()=>{
 						// divider.style.height = "8px";
 						// divider.style.width ="8px";
 					}else if(bottomLeftCornerSingle.includes(index)){
-						tile.style.backgroundRepeat = "no-repeat";
-						tile.style.backgroundImage = imageLocation;
+						// tile.style.backgroundRepeat = "no-repeat";
+						// tile.style.backgroundImage = imageLocation;
 						tile.style.backgroundPosition ="-14px -27px";
 						// divider.style.borderBottom = "1px solid blue";
 						// divider.style.borderLeft ="1px solid blue";
@@ -445,48 +440,52 @@ const boardLayout1 = ()=>{
 						// divider.style.borderBottomRightRadius = "3px";
 						// divider.style.height = "8px";
 						// divider.style.width ="8px";
-						tile.style.backgroundRepeat = "no-repeat";
-						tile.style.backgroundImage = imageLocation;
+						// tile.style.backgroundRepeat = "no-repeat";
+						// tile.style.backgroundImage = imageLocation;
 						tile.style.backgroundPosition ="-37px -27px";
 					}
-					tile.appendChild(divider);
+					// tile.appendChild(divider);
 					tile.classList.add("blocked");
 				}else if(verticalDoubleLines.includes(index) ||verticalSingleLines.includes(index)){
+					tile.style.backgroundRepeat = "no-repeat";
+					tile.style.backgroundImage = imageLocation;
 					if(verticalSingleLines.includes(index)){
 						// divider.style.borderLeft = "1px solid blue";
 						// tile.style.justifyContent= "center"
 						// divider.style.height ="inherit";
-						tile.style.backgroundRepeat = "no-repeat";
-						tile.style.backgroundImage = imageLocation;
+						// tile.style.backgroundRepeat = "no-repeat";
+						// tile.style.backgroundImage = imageLocation;
 						tile.style.backgroundPosition ="-54px -54px";
 					}else {
 						// divider.style.borderLeft = "1px solid blue";
 						// divider.style.borderRight = "1px solid blue";
 						// divider.style.height ="inherit";
 						// divider.style.width = "3px";
-						tile.style.backgroundImage = imageLocation;
-						tile.style.backgroundPosition ="0px 40px";
+						// tile.style.backgroundImage = imageLocation;
+						tile.style.backgroundPosition ="-0px -40px";
 						
 						
 					}
-					tile.appendChild(divider)
+					// tile.appendChild(divider)
 					tile.classList.add("blocked");
 				}else if( horizontalDoubleLines.includes(index) || horizontalSingleLines.includes(index)){
+					tile.style.backgroundRepeat = "no-repeat";
+					tile.style.backgroundImage = imageLocation;
 					if(horizontalSingleLines.includes(index)){
 						// divider.style.borderTop="1px solid blue";
 						// divider.style.width = "inherit";
-						tile.style.backgroundRepeat = "no-repeat";
-						tile.style.backgroundImage = imageLocation;
+						// tile.style.backgroundRepeat = "no-repeat";
+						// tile.style.backgroundImage = imageLocation;
 						tile.style.backgroundPosition ="-28px -12px";
 					}else{
 						// divider.style.borderTop="1px solid blue";
 						// divider.style.borderBottom ="1px solid blue";
 						// divider.style.height = "3px";
 						// divider.style.width = "inherit";
-						tile.style.backgroundImage = imageLocation;
-						tile.style.backgroundPosition ="-430px -72px"
+						// tile.style.backgroundImage = imageLocation;
+						tile.style.backgroundPosition ="-20px -72px";
 					}
-					tile.appendChild(divider)
+					// tile.appendChild(divider)
 					tile.classList.add("blocked");
 				}
 				else if(index === 85 ||index ===110|| index === 645 || index === 670){
