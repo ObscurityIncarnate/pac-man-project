@@ -28,6 +28,7 @@ main{
 #health-Bar{
     display:  flex;
     pointer-events:  none;
+    align-items: center;
     /* flex-direction: row; */
 }
 .dot div{
@@ -42,28 +43,233 @@ main{
     background-image: url('../assets/Pac-Man - All Assets_Palettes.png');
 	background-position : -903px -168px;
 	background-repeat: no-repeat;
-    z-index: -1;
+    /* z-index: -1; */
 }
-.pinkGhost{
+/* .pinkGhost{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
 	background-position:-303px -83px;
 	background-repeat: no-repeat;
+    animation: pinkScaredIdle 0.4s steps(2) infinite;
+} */
+.pinkGhostLeft{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	/* background-position:-269px -83px; */
+	background-repeat: no-repeat;
+    animation: pinkGhostLeft 0.4s steps(2) infinite;
 }
-.blueGhost{
+.pinkGhostUp{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	/* background-position:-269px -83px; */
+	background-repeat: no-repeat;
+    animation: pinkGhostUp 0.4s steps(2) infinite;
+}
+.pinkGhostDown{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	/* background-position:-269px -83px; */
+	background-repeat: no-repeat;
+    animation: pinkGhostDown 0.4s steps(2) infinite;
+}
+.pinkGhostRight{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	/* background-position:-269px -83px; */
+	background-repeat: no-repeat;
+    animation: pinkGhostRight 0.4s steps(2) infinite;
+}
+.pinkGhostScared{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	/* background-position:-269px -83px; */
+	background-repeat: no-repeat;
+    animation: pinkGhostScared 0.4s steps(2) infinite;
+}
+ @keyframes pinkGhostUp {
+    from {background-position:-303px -83px;}
+    to {background-position: -337px -83px;}
+ }
+@keyframes pinkGhostLeft {
+    from {background-position:-269px -83px;}
+    to {background-position:-303px -83px;}
+}
+@keyframes pinkGhostDown{
+    from {background-position:-235px -83px;}
+    to {background-position:-269px -83px;}
+}
+@keyframes pinkGhostRight{
+    from {background-position:-201px -83px;}
+    to {background-position:-235px -83px;}
+}
+@keyframes pinkGhostScared {
+    from {background-position:-201px -168px;}
+    to {background-position:-235px -168px;}
+}
+/* .blueGhost{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
 	background-position:-503px -83px;
 	background-repeat: no-repeat;
+    animation: blueScaredIdle 0.4s steps(2) infinite;
+} */
+.blueGhostLeft{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	/* background-position:-269px -83px; */
+	background-repeat: no-repeat;
+    animation: blueGhostLeft 0.4s steps(2) infinite;
 }
-.redGhost{
+.blueGhostUp{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	/* background-position:-269px -83px; */
+	background-repeat: no-repeat;
+    animation: blueGhostUp 0.4s steps(2) infinite;
+}
+.blueGhostDown{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	/* background-position:-269px -83px; */
+	background-repeat: no-repeat;
+    animation: blueGhostDown 0.4s steps(2) infinite;
+}
+.blueGhostRight{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	/* background-position:-269px -83px; */
+	background-repeat: no-repeat;
+    animation: blueGhostRight 0.4s steps(2) infinite;
+}
+.blueGhostScared{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	/* background-position:-269px -83px; */
+	background-repeat: no-repeat;
+    animation: blueGhostScared 0.4s steps(2) infinite;
+}
+@keyframes blueGhostUp {
+    from {background-position:-503px -83px;}
+    to {background-position: -537px -83px;}
+ }
+@keyframes blueGhostLeft {
+    from {background-position:-469px -83px;}
+    to {background-position:-503px -83px;}
+}
+@keyframes blueGhostDown{
+    from {background-position:-435px -83px;}
+    to {background-position:-469px -83px;}
+}
+@keyframes blueGhostRight{
+    from {background-position:-401px -83px;}
+    to {background-position:-435px -83px;}
+}
+@keyframes blueGhostScared {
+    from {background-position:-401px -168px;}
+    to {background-position:-435px -168px;}
+}
+/* .redGhost{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
 	background-position:-103px -83px;
 	background-repeat: no-repeat;
+    animation: redScaredIdle 0.4s steps(2) infinite;
+} */
+.redGhostLeft{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	/* background-position:-269px -83px; */
+	background-repeat: no-repeat;
+    animation: redGhostLeft 0.4s steps(2) infinite;
 }
-.orangeGhost{
+.redGhostUp{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	/* background-position:-269px -83px; */
+	background-repeat: no-repeat;
+    animation: redGhostUp 0.4s steps(2) infinite;
+}
+.redGhostDown{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	/* background-position:-269px -83px; */
+	background-repeat: no-repeat;
+    animation: redGhostDown 0.4s steps(2) infinite;
+}
+.redGhostRight{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	/* background-position:-269px -83px; */
+	background-repeat: no-repeat;
+    animation: redGhostRight 0.4s steps(2) infinite;
+}
+.redGhostScared{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	/* background-position:-269px -83px; */
+	background-repeat: no-repeat;
+    animation: blueGhostScared 0.4s steps(2) infinite;
+}
+@keyframes redGhostUp {
+    from {background-position:-103px -83px;}
+    to {background-position: -137px -83px;}
+ }
+@keyframes redGhostLeft {
+    from {background-position:-69px -83px;}
+    to {background-position:-103px -83px;}
+}
+@keyframes redGhostDown{
+    from {background-position:-35px -83px;}
+    to {background-position:-69px -83px;}
+}
+@keyframes redGhostRight{
+    from {background-position:-1px -83px;}
+    to {background-position:-35px -83px;}
+}
+@keyframes redGhostScared {
+    from {background-position:-1px -168px;}
+    to {background-position:-35px -168px;}
+}
+/* .orangeGhost{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
 	background-position:-703px -83px;
 	background-repeat: no-repeat;
+    animation: orangeScaredIdle 0.4s steps(2) infinite;
+} */
+.orangeGhostLeft{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	/* background-position:-269px -83px; */
+	background-repeat: no-repeat;
+    animation: orangeGhostLeft 0.4s steps(2) infinite;
 }
+.orangeGhostUp{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	/* background-position:-269px -83px; */
+	background-repeat: no-repeat;
+    animation: orangeGhostUp 0.4s steps(2) infinite;
+}
+.orangeGhostDown{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	/* background-position:-269px -83px; */
+	background-repeat: no-repeat;
+    animation: orangeGhostDown 0.4s steps(2) infinite;
+}
+.orangeGhostRight{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	/* background-position:-269px -83px; */
+	background-repeat: no-repeat;
+    animation: orangeGhostRight 0.4s steps(2) infinite;
+}
+.orangeGhostScared{
+    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
+	/* background-position:-269px -83px; */
+	background-repeat: no-repeat;
+    animation: orangeGhostScared 0.4s steps(2) infinite;
+}
+@keyframes orangeGhostUp {
+    from {background-position:-703px -83px;}
+    to {background-position: -737px -83px;}
+ }
+@keyframes orangeGhostLeft {
+    from {background-position:-669px -83px;}
+    to {background-position:-703px -83px;}
+}
+@keyframes orangeGhostDown{
+    from {background-position:-635px -83px;}
+    to {background-position:-669px -83px;}
+}
+@keyframes orangeGhostRight{
+    from {background-position:-601px -83px;}
+    to {background-position:-635px -83px;}
+}
+@keyframes orangeGhostScared {
+    from {background-position:-601px -168px;}
+    to {background-position:-635px -168px;}
+}
+
 .pacman{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
 	background-position:-503px -337px;

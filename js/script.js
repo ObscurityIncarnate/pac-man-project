@@ -3,7 +3,11 @@
 //boards
 //Constants
 const boardAmount =1;
-const cantPassThrough = ["blocked","redGhost", "blueGhost", "pinkGhost", "orangeGhost"]
+const cantPassThrough = ["blocked","pinkGhostLeft", "pinkGhostUp","pinkGhostDown","pinkGhostRight", 
+	"blueGhostLeft", "blueGhostRight", "blueGhostUp", "blueGhostDown",
+	"pinkGhostLeft", "pinkGhostRight", "pinkGhostUp", "pinkGhostDown",
+	"orangeGhostLeft", "orangeGhostRight", "orangeGhostUp", "orangeGhostDown"]
+
 
 //Variables
 let userName;
@@ -18,21 +22,25 @@ let pinkGhost = {
 	position: null,
 	spawn: null,
 	target: null,
+	animation: "Up",
 };
 let blueGhost = {
 	position: null,
 	spawn: null,
 	target: null,
+	animation: "Up",
 };
 let redGhost = {
 	position: null,
 	spawn: null,
 	target: null,
+	animation: "Up",
 };
 let orangeGhost ={
 	position: null,
 	spawn: null,
 	target: null,
+	animation: "Up",
 };
 let empowered;
 let gameRun;
@@ -302,7 +310,7 @@ const boardLayout1 = ()=>{
 				//vertical dividers
 				if(leftCornerDouble.includes(index) || rightCornerDouble.includes(index)|| bottomLeftCornerDouble.includes(index) || bottomRightCornerDouble.includes(index)){
 					const smallerCorner =document.createElement("div");
-					console.log("here")
+					// console.log("here")
 					
 					if(leftCornerDouble.includes(index)){
 						divider.style.borderTop = "1px solid blue";
@@ -408,20 +416,20 @@ const boardLayout1 = ()=>{
 				}else if(index == 404){
 					pinkGhost.spawn = index;
 					pinkGhost.position = index;
-					tile.classList.add("pinkGhost")
+					tile.classList.add(`pinkGhost${redGhost.animation}`)
 				}else if(index ==405){
 					blueGhost.spawn =index;
 					blueGhost.position = index;
-					tile.classList.add("blueGhost")
+					tile.classList.add(`blueGhost${blueGhost.animation}`)
 				}else if(index == 406){
 					redGhost.spawn = index;
 					redGhost.position = index;
-					tile.classList.add("redGhost")
+					tile.classList.add(`redGhost${redGhost.animation}`)
 					// ti
 				}else if(index == 407){
 					orangeGhost.spawn = index;
 					orangeGhost.position =  index;
-					tile.classList.add("orangeGhost")
+					tile.classList.add(`orangeGhost${orangeGhost.animation}`)
 				}else if(index == 657){
 					pacman.spawn = index;
 					pacman.position = index;
@@ -462,7 +470,7 @@ const ghostMoveCloser = (ghost, ghostname)=>{
 		let direction;
 		if(!empowered){
 			let minDistance = Number.MAX_SAFE_INTEGER;
-			console.log(minDistance)
+			// console.log(minDistance)
 			distanceArray.forEach((distance, index)=>{
 				if(distance !== null){
 					if(distance < minDistance){
@@ -471,7 +479,7 @@ const ghostMoveCloser = (ghost, ghostname)=>{
 					}
 				}
 			})
-			console.log(minDistance)
+			// console.log(minDistance)
 		}else{
 			let maxDistance = Number.MIN_SAFE_INTEGER;
 			distanceArray.forEach((distance, index)=>{
@@ -484,31 +492,97 @@ const ghostMoveCloser = (ghost, ghostname)=>{
 			})
 		}
 		// console.log(ghost.constructor.name)
-		document.querySelector(`#tile${ghost.position}`).classList.remove(`${ghostname}`);
+		console.log(direction)
+		console.log(`${ghostname}${direction}, and the position ${ghost.position}`)
+		document.querySelector(`#tile${ghost.position}`).classList.remove(`${ghostname}${ghost.animation}`);
 		if(direction === 0){
 			ghost.position = leftMove;
-			document.querySelector(`#tile${ghost.position}`).classList.add(`${ghostname}`);
-			if(ghost.position === pacman.position){
-				loseLife()
+			const newPosition = document.querySelector(`#tile${ghost.position}`);
+			// newPosition.classList.add(`${ghostname}`);
+			if(!empowered){
+				ghost.animation = "Left";
+				// newPosition.style.animation = `${ghostname}Left 0.4s steps(2) infinite;`;
+				newPosition.classList.add(`${ghostname}${ghost.animation}`);
+				if(ghost.position === pacman.position){
+					loseLife();
+				}
+				// else{
+				// 	newPosition.classList.add(`${ghostname}${ghost.animation}`);
+				// }
+			}else{
+				// newPosition.style.animation = `${ghostname}Scared 0.4s steps(2) infinite;`
+				// newPosition.classList.add(`${ghostname}${ghost.animation}`);
+				if(ghost.position === pacman.position){
+					score+=200;
+				}else{
+					ghost.animation  = "Scared";
+					newPosition.classList.add(`${ghostname}${ghost.animation}`);
+				}
 			}
+			
 		}else if(direction === 1){
 			ghost.position = rightMove;
-			document.querySelector(`#tile${ghost.position}`).classList.add(`${ghostname}`);
-			if(ghost.position === pacman.position){
-				loseLife()
+			const newPosition = document.querySelector(`#tile${ghost.position}`);
+			// newPosition.classList.add(`${ghostname}`);
+			if(!empowered){
+				ghost.animation = "Right";
+				// newPosition.style.animation = `${ghostname}Right 0.4s steps(2) infinite;`;
+				console.log
+				newPosition.classList.add(`${ghostname}${ghost.animation}`);
+				if(ghost.position === pacman.position){
+					loseLife();
+				}
+			}else{
+				// newPosition.style.animation = `${ghostname}Scared 0.4s steps(2) infinite;`
+				// newPosition.classList.add(`${ghostname}${ghost.animation}`);
+				if(ghost.position === pacman.position){
+					score+=200;
+				}else{
+					ghost.animation  = "Scared";
+					newPosition.classList.add(`${ghostname}${ghost.animation}`);
+				}
 			}
+			
 		}else if(direction ===2){
 			ghost.position = upMove;
-			document.querySelector(`#tile${ghost.position}`).classList.add(`${ghostname}`);
-			if(ghost.position === pacman.position){
-				loseLife()
+			const newPosition = document.querySelector(`#tile${ghost.position}`)
+			// newPosition.classList.add(`${ghostname}`);
+			if(!empowered){
+				// newPosition.style.animation = `${ghostname}Up 0.4s steps(2) infinite;`;
+				ghost.animation = "Up";
+				newPosition.classList.add(`${ghostname}${ghost.animation}`);
+				if(ghost.position === pacman.position){
+					loseLife();
+				}
+			}else{
+				if(ghost.position === pacman.position){
+					score+=200;
+				}else{
+					ghost.animation  = "Scared";
+					newPosition.classList.add(`${ghostname}${ghost.animation}`);
+				}
 			}
+			
 		}else if(direction === 3){
 			ghost.position = downMove;
-			document.querySelector(`#tile${ghost.position}`).classList.add(`${ghostname}`);
-			if(ghost.position === pacman.position){
-				loseLife()
+			const newPosition = document.querySelector(`#tile${ghost.position}`)
+			// newPosition.classList.add(`${ghostname}`);
+			if(!empowered){
+				ghost.animation = "Down";
+				newPosition.classList.add(`${ghostname}${ghost.animation}`);
+				// newPosition.style.animation = `${ghostname}Down 0.4s steps(2) infinite;`;
+				if(ghost.position === pacman.position){
+					loseLife();
+				}
+			}else{
+				if(ghost.position === pacman.position){
+					score+=200;
+				}else{
+					ghost.animation  = "Scared";
+					newPosition.classList.add(`${ghostname}${ghost.animation}`);
+				}
 			}
+			
 		}else{
 			if(ghost.position === pacman.position){
 				loseLife()
@@ -550,7 +624,7 @@ const updatePostion = ()=>{
 	let proposedPosition;
 	let modifier;
 	const currentPosition =  document.querySelector(`#tile${pacman.position}`);
-	console.log(pacman.position)
+	// console.log(pacman.position)
 	if(pacman.lastdirection === "right"){
 		
 		if(tunnelTiles.includes(pacman.position) && document.querySelector(`#tile${pacman.position+1}`).classList.contains("blocked")){
@@ -612,6 +686,8 @@ const updatePostion = ()=>{
 				pacman.position = pacman.position+modifier;
 				proposedPosition.classList.add("pacman", pacman.lastdirection)
 			}else if(proposedPosition.classList.contains("powerPellet")){
+				empowered =true;
+				setTimeout(()=>{empowered =false}, 8000)
 				score+=50;
 				proposedPosition.classList.remove("powerPellet");
 				pacman.position = pacman.position+modifier;
