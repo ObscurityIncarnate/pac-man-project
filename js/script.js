@@ -64,6 +64,13 @@ boardElement.style.gridTemplateColumns = "auto ".repeat(28);
 boardElement.style.gridTemplateRows = "auto ".repeat(30);
 
 }
+const removeTiles= ()=>{
+	for(let i=0; i<boardSize; i++){
+		const tile = document.querySelector(`#tile${i}`);
+		tile.remove(); 
+	}
+
+}
 const boardSelector = (board)=>{
 	if(board === 0){
 		boardLayout1();
@@ -625,6 +632,8 @@ const init = ()=>{
 	pacman.lives = 3;
 	score = 0;
 	beginChase = false;
+	removeTiles();
+	setTiles();
 	boardSelector(0);
 	document.addEventListener("keydown",(event)=>{
 		console.log(event.key);
