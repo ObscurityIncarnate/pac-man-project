@@ -634,7 +634,7 @@ const init = ()=>{
 	beginChase = false;
 	removeTiles();
 	setTiles();
-	boardSelector(0);
+	boardSelector(currentboard);
 	document.addEventListener("keydown",(event)=>{
 		console.log(event.key);
 		// const 

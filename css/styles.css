@@ -36,11 +36,13 @@ main{
     background-image: url('../assets/Pac-Man - All Assets_Palettes.png');
     background-position : -936px -205px;
 	background-repeat: no-repeat;
+    z-index: -1;
 }
 .powerPellet{
     background-image: url('../assets/Pac-Man - All Assets_Palettes.png');
 	background-position : -903px -168px;
 	background-repeat: no-repeat;
+    z-index: -1;
 }
 .pinkGhost{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
