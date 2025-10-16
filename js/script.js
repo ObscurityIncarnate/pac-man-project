@@ -314,136 +314,31 @@ const boardLayout1 = ()=>{
 		
 			//looping paths
 			if(!(emptyTiles.includes(index) || tunnelTiles.includes(index))){
-				const divider = document.createElement("div");
 				
 				//vertical dividers
 				if(leftCornerDouble.includes(index) || rightCornerDouble.includes(index)|| bottomLeftCornerDouble.includes(index) || bottomRightCornerDouble.includes(index)){
-					// const smallerCorner =document.createElement("div");
 						tile.style.backgroundRepeat = "no-repeat";
 						tile.style.backgroundImage = imageLocation;
-					// console.log("here")
-					// tile.style.backgroundImage = imageLocation;
 					if(leftCornerDouble.includes(index)){
 						tile.style.backgroundPosition ="0px -148px";
-						// divider.style.borderTop = "1px solid blue";
-						// smallerCorner.style.borderTop = "1px solid blue";
-						// divider.style.borderLeft ="1px solid blue";
-						// smallerCorner.style.borderLeft ="1px solid blue";
-						// tile.style.justifyContent = "flex-end";
-						// tile.style.alignItems= "flex-end";
-						// divider.style.borderTopLeftRadius = "3px";
-						// smallerCorner.style.height="5px";
-						// smallerCorner.style.width = "6px";
-						// divider.style.height = "9px";
-						// divider.style.width ="10px";
-						// smallerCorner.style.borderTopLeftRadius = "3px";
 					}else if(rightCornerDouble.includes(index)){
 						tile.style.backgroundPosition ="-220px -148px";
-						// divider.style.borderTop = "1px solid blue";
-						// smallerCorner.style.borderTop = "1px solid blue";
-						// divider.style.borderRight ="1px solid blue";
-						// smallerCorner.style.borderRight = "1px solid blue";
-						// divider.style.borderTopRightRadius = "3px";
-						// smallerCorner.style.borderTopRightRadius = "3px";
-						// smallerCorner.style.height="5px";
-						// smallerCorner.style.width = "5px"
-						// divider.style.height = "9px";
-						// divider.style.width ="9px";
-						// tile.style.justifyContent= "flex-start";
-						// tile.style.alignItems= "flex-end";
 					}else if(bottomLeftCornerDouble.includes(index)){
-
 						tile.style.backgroundPosition ="-0px -240px";
-						// divider.style.borderBottom = "1px solid blue";
-						// smallerCorner.style.borderBottom = "1px solid blue";
-						// divider.style.borderLeft ="1px solid blue";
-						// smallerCorner.style.borderLeft ="1px solid blue";
-						// smallerCorner.style.height="6px";
-						// smallerCorner.style.width = "6px";
-						// divider.style.height = "10px";
-						// divider.style.width ="10px";
-						// divider.style.borderBottomLeftRadius = "3px";
-						// smallerCorner.style.borderBottomLeftRadius = "3px";
-						// tile.style.alignItems= "flex-start";
-						// tile.style.justifyContent = "flex-end";
 					}else{
-						// divider.style.borderBottom = "1px solid blue";
-						// smallerCorner.style.borderBottom = "1px solid blue";
-						// divider.style.borderRight ="1px solid blue";
-						// smallerCorner.style.borderRight = "1px solid blue";
-						// divider.style.borderBottomRightRadius = "3px";
-						// smallerCorner.style.borderBottomRightRadius = "3px";
-						// smallerCorner.style.height="6px";
-						// smallerCorner.style.width = "5px"
-						// divider.style.height = "10px";
-						// divider.style.width ="9px";
-						// tile.style.justifyContent= "flex-start";
-						// tile.style.alignItems= "flex-start";
 						tile.style.backgroundPosition ="-220px -240px";
 					}
-					
-					
-					
-					
-					// divider.style.borderRight = "1px solid blue";
-					// divider.style.borderTopLeftRadius = "100%";
-					// divider.style.borderTopRightRadius= "-100%"
-					// divider.style.transform= "translate(-50%, -50%)";
-					// divider.style.borderRadius = "2px"
-					
-					// divider.style.zIndex = "0"
-					
-					// smallerCorner.style.zIndex = "1"
-					// divider.style.width = "3px";
-					// tile.appendChild(divider);
-					// divider.style.position = "absolute";
-					// tile.appendChild(smallerCorner);
 					tile.classList.add("blocked");
-					
-					
 				}else if(leftCornerSingle.includes(index) || rightCornerSingle.includes(index) || bottomLeftCornerSingle.includes(index) || bottomRightCornerSingle.includes(index)){
-					// const divider = document.createElement("div");
 					tile.style.backgroundRepeat = "no-repeat";
 					tile.style.backgroundImage = imageLocation;
 					if(leftCornerSingle.includes(index)){
-						// divider.style.borderTop = "1px solid blue";
-						// divider.style.borderLeft ="1px solid blue";
-						// tile.style.justifyContent = "flex-end";
-						// tile.style.alignItems= "flex-end";
-						// divider.style.borderTopLeftRadius = "3px";
-						// divider.style.height = "8px";
-						// divider.style.width ="8px";
 						tile.style.backgroundPosition ="-14px -12px";
 					}else if(rightCornerSingle.includes(index)){
 						tile.style.backgroundPosition ="-37px -12px";
-						// divider.style.borderTop = "1px solid blue";
-						// divider.style.borderRight ="1px solid blue";
-						// tile.style.justifyContent = "flex-start";
-						// tile.style.alignItems= "flex-end";
-						// divider.style.borderTopRightRadius = "3px";
-						// divider.style.height = "8px";
-						// divider.style.width ="8px";
 					}else if(bottomLeftCornerSingle.includes(index)){
-						// tile.style.backgroundRepeat = "no-repeat";
-						// tile.style.backgroundImage = imageLocation;
 						tile.style.backgroundPosition ="-14px -27px";
-						// divider.style.borderBottom = "1px solid blue";
-						// divider.style.borderLeft ="1px solid blue";
-						// tile.style.justifyContent = "flex-end";
-						// tile.style.alignItems= "flex-start";
-						// divider.style.borderBottomLeftRadius = "3px";
-						// divider.style.height = "8px";
-						// divider.style.width ="8px";
 					}else if(bottomRightCornerSingle.includes(index)){
-						// divider.style.borderBottom = "1px solid blue";
-						// divider.style.borderRight ="1px solid blue";
-						// tile.style.justifyContent = "flex-start";
-						// tile.style.alignItems= "flex-start";
-						// divider.style.borderBottomRightRadius = "3px";
-						// divider.style.height = "8px";
-						// divider.style.width ="8px";
-						// tile.style.backgroundRepeat = "no-repeat";
-						// tile.style.backgroundImage = imageLocation;
 						tile.style.backgroundPosition ="-37px -27px";
 					}
 					// tile.appendChild(divider);
@@ -452,21 +347,9 @@ const boardLayout1 = ()=>{
 					tile.style.backgroundRepeat = "no-repeat";
 					tile.style.backgroundImage = imageLocation;
 					if(verticalSingleLines.includes(index)){
-						// divider.style.borderLeft = "1px solid blue";
-						// tile.style.justifyContent= "center"
-						// divider.style.height ="inherit";
-						// tile.style.backgroundRepeat = "no-repeat";
-						// tile.style.backgroundImage = imageLocation;
 						tile.style.backgroundPosition ="-54px -54px";
 					}else {
-						// divider.style.borderLeft = "1px solid blue";
-						// divider.style.borderRight = "1px solid blue";
-						// divider.style.height ="inherit";
-						// divider.style.width = "3px";
-						// tile.style.backgroundImage = imageLocation;
 						tile.style.backgroundPosition ="-0px -40px";
-						
-						
 					}
 					// tile.appendChild(divider)
 					tile.classList.add("blocked");
@@ -474,17 +357,8 @@ const boardLayout1 = ()=>{
 					tile.style.backgroundRepeat = "no-repeat";
 					tile.style.backgroundImage = imageLocation;
 					if(horizontalSingleLines.includes(index)){
-						// divider.style.borderTop="1px solid blue";
-						// divider.style.width = "inherit";
-						// tile.style.backgroundRepeat = "no-repeat";
-						// tile.style.backgroundImage = imageLocation;
 						tile.style.backgroundPosition ="-28px -12px";
 					}else{
-						// divider.style.borderTop="1px solid blue";
-						// divider.style.borderBottom ="1px solid blue";
-						// divider.style.height = "3px";
-						// divider.style.width = "inherit";
-						// tile.style.backgroundImage = imageLocation;
 						tile.style.backgroundPosition ="-20px -72px";
 					}
 					// tile.appendChild(divider)
@@ -495,7 +369,7 @@ const boardLayout1 = ()=>{
 				}else if(index == 404){
 					pinkGhost.spawn = index;
 					pinkGhost.position = index;
-					tile.classList.add(`pinkGhost${redGhost.animation}`)
+					tile.classList.add(`pinkGhost${pinkGhost.animation}`)
 				}else if(index ==405){
 					blueGhost.spawn =index;
 					blueGhost.position = index;
@@ -514,28 +388,15 @@ const boardLayout1 = ()=>{
 					pacman.position = index;
 					tile.classList.add("pacman")
 				}else{
-						const dot = document.createElement("div");
-						tile.classList.add("dot")
-						tile.appendChild(dot);
+					const dot = document.createElement("div");
+					tile.classList.add("dot")
+					tile.appendChild(dot);
 				}
 			}
 			
 		// }
 	});
 }
-const calculateDistance = (objectPosition, targetPosition)=>{
-	if(cantPassThrough.some( className => document.querySelector(`#tile${objectPosition}`).classList.contains(className))){
-		return null;
-	}else{
-		const xObjectComponent = objectPosition%28;
-		const yObjectComponent = Math.floor(objectPosition/28);
-		const xTargetComponent = targetPosition%28;
-		const yTargetComponent = Math.floor(targetPosition/28);
-
-		return Math.sqrt(((xObjectComponent-xTargetComponent)**2) + ((yObjectComponent-yTargetComponent)**2))
-	}
-}
-
 	// const movementAlgorithm =(currentPosition, targetPosition)=>{
 	// 	if(currentPosition === targetPosition){
 	// 		console.log("is here the issue")
@@ -657,19 +518,31 @@ const bfs = (startPos, targetPos)=>{
 	const pathToTarget = Array(boardSize).fill(`${startPos}`);
 	while(queue.length >0){
 		const currentPos = queue.shift();
-		console.log(currentPos)
+		// console.log(currentPos)
 		if(currentPos === targetPos){
-			return[ distances[currentPos], pathToTarget[currentPos]];
+			// if(currentPos)
+			const nextMove = pathToTarget[currentPos].split("->")[1];
+			if(nextMove == startPos-1){
+				return 0;
+			}else if(nextMove == startPos+1){
+				return 1;
+			}else if(nextMove  == startPos-28){
+				return 2;
+			}else{
+				return 3;
+			}
+			// return[ distances[currentPos], nextMove];
 		}
 		visitedTiles[currentPos] = true;
 		const neighbours = [currentPos-1, currentPos+1, currentPos-28, currentPos+28];
 		for(const neighbour of neighbours){
-			console.log(neighbour)
+			// console.log(neighbour)
 			if(neighbour <0 || neighbour>boardSize-1) continue;
 			// if ((currentPos % 28 === 0 && neighbour === currentPos - 1) || (currentPos % 28 === 28 - 1 && neighbour === currentPos + 1)) {
         	// 	continue;
       		// }
-			if(document.querySelector(`#tile${neighbour}`).classList.contains("blocked") || visitedTiles[neighbour] === true) continue;
+			// if(document.querySelector(`#tile${neighbour}`).classList.contains("blocked") || visitedTiles[neighbour] === true) continue;
+			if(cantPassThrough.some(className => { return document.querySelector(`#tile${neighbour}`).classList.contains(className) })|| visitedTiles[neighbour] === true) continue;
 			
 			queue.push(neighbour);
 			// distances[neighbour] = distances[currentPos]+1;
@@ -686,152 +559,25 @@ const bfs = (startPos, targetPos)=>{
 
 const ghostMoveCloser = (ghost, ghostname)=>{
 	if(beginChase){
-		const leftMove =  ghost.position -1;
-		const rightMove =  ghost.position +1;
-		const upMove =  ghost.position -28;
-		const downMove =  ghost.position +28;
-		const distanceArray = [];
-		distanceArray.push(calculateDistance(leftMove, ghost.target));
-		distanceArray.push(calculateDistance(rightMove, ghost.target ));
-		distanceArray.push(calculateDistance(upMove, ghost.target));
-		distanceArray.push(calculateDistance(downMove, ghost.target));
-		// visited =[];
-		// let step =0;
-		let direction = bf(ghost.position, pacman.position);
-		if(!empowered){
-			let minDistance = Number.MAX_SAFE_INTEGER;
-			// console.log(minDistance)
-			distanceArray.forEach((distance, index)=>{
-				if(distance !== null){
-					if(distance < minDistance){
-						minDistance = distance;
-						direction = index;
-					}
-				}
-			})
-			// console.log(minDistance)
-		}else{
-			let maxDistance = Number.MIN_SAFE_INTEGER;
-			distanceArray.forEach((distance, index)=>{
-				if(distance !== null){
-					if(distance> maxDistance){
-						maxDistance = distance;
-						direction = index;
-					}
-				}
-			})
-		}
-		// console.log(ghost.constructor.name)
-		console.log(direction)
-		console.log(`${ghostname}${direction}, and the position ${ghost.position}`)
-		if(direction){
+		let direction = bfs(ghost.position, pacman.position);
+		console.log(ghostname, direction)
+		if(direction!= Infinity){
 			document.querySelector(`#tile${ghost.position}`).classList.remove(`${ghostname}${ghost.animation}`);
 			if(direction === 0){
-			ghost.position = leftMove;
-			const newPosition = document.querySelector(`#tile${ghost.position}`);
-			// newPosition.classList.add(`${ghostname}`);
-			if(!empowered){
-				ghost.animation = "Left";
-				// newPosition.style.animation = `${ghostname}Left 0.4s steps(2) infinite;`;
-				newPosition.classList.add(`${ghostname}${ghost.animation}`);
-				if(ghost.position === pacman.position){
-					loseLife();
-				}
-				// else{
-				// 	newPosition.classList.add(`${ghostname}${ghost.animation}`);
-				// }
-			}else{
-				// newPosition.style.animation = `${ghostname}Scared 0.4s steps(2) infinite;`
-				// newPosition.classList.add(`${ghostname}${ghost.animation}`);
-				if(ghost.position === pacman.position){
-					score+=200;
-				}else{
-					ghost.animation  = "Scared";
-					newPosition.classList.add(`${ghostname}${ghost.animation}`);
-				}
-			}
-			
-		}else if(direction === 1){
-			ghost.position = rightMove;
-			const newPosition = document.querySelector(`#tile${ghost.position}`);
-			// newPosition.classList.add(`${ghostname}`);
-			if(!empowered){
-				ghost.animation = "Right";
-				// newPosition.style.animation = `${ghostname}Right 0.4s steps(2) infinite;`;
-				// console.log
-				newPosition.classList.add(`${ghostname}${ghost.animation}`);
-				if(ghost.position === pacman.position){
-					loseLife();
-				}
-			}else{
-				// newPosition.style.animation = `${ghostname}Scared 0.4s steps(2) infinite;`
-				// newPosition.classList.add(`${ghostname}${ghost.animation}`);
-				if(ghost.position === pacman.position){
-					score+=200;
-				}else{
-					ghost.animation  = "Scared";
-					newPosition.classList.add(`${ghostname}${ghost.animation}`);
-				}
-			}
-			
-		}else if(direction ===2){
-			ghost.position = upMove;
-			const newPosition = document.querySelector(`#tile${ghost.position}`)
-			// newPosition.classList.add(`${ghostname}`);
-			if(!empowered){
-				// newPosition.style.animation = `${ghostname}Up 0.4s steps(2) infinite;`;
-				ghost.animation = "Up";
-				newPosition.classList.add(`${ghostname}${ghost.animation}`);
-				if(ghost.position === pacman.position){
-					loseLife();
-				}
-			}else{
-				if(ghost.position === pacman.position){
-					score+=200;
-				}else{
-					ghost.animation  = "Scared";
-					newPosition.classList.add(`${ghostname}${ghost.animation}`);
-				}
-			}
-			
-		}else if(direction === 3){
-			ghost.position = downMove;
-			const newPosition = document.querySelector(`#tile${ghost.position}`)
-			// newPosition.classList.add(`${ghostname}`);
-			if(!empowered){
-				ghost.animation = "Down";
-				newPosition.classList.add(`${ghostname}${ghost.animation}`);
-				// newPosition.style.animation = `${ghostname}Down 0.4s steps(2) infinite;`;
-				if(ghost.position === pacman.position){
-					loseLife();
-				}
-			}else{
-				if(ghost.position === pacman.position){
-					score+=200;
-				}else{
-					ghost.animation  = "Scared";
-					newPosition.classList.add(`${ghostname}${ghost.animation}`);
-				}
-			}
-			
-		}
-			if(direction === 0){
-				ghost.position = leftMove;
+				console.log(ghost.position)
+				ghost.position = ghost.position-1;
 				const newPosition = document.querySelector(`#tile${ghost.position}`);
 				// newPosition.classList.add(`${ghostname}`);
 				if(!empowered){
 					ghost.animation = "Left";
-					// newPosition.style.animation = `${ghostname}Left 0.4s steps(2) infinite;`;
+
 					newPosition.classList.add(`${ghostname}${ghost.animation}`);
 					if(ghost.position === pacman.position){
 						loseLife();
 					}
-					// else{
-					// 	newPosition.classList.add(`${ghostname}${ghost.animation}`);
-					// }
+				
 				}else{
-					// newPosition.style.animation = `${ghostname}Scared 0.4s steps(2) infinite;`
-					// newPosition.classList.add(`${ghostname}${ghost.animation}`);
+					
 					if(ghost.position === pacman.position){
 						score+=200;
 					}else{
@@ -839,78 +585,64 @@ const ghostMoveCloser = (ghost, ghostname)=>{
 						newPosition.classList.add(`${ghostname}${ghost.animation}`);
 					}
 				}
-				
+			
 			}else if(direction === 1){
-				ghost.position = rightMove;
-				const newPosition = document.querySelector(`#tile${ghost.position}`);
-				// newPosition.classList.add(`${ghostname}`);
-				if(!empowered){
-					ghost.animation = "Right";
-					// newPosition.style.animation = `${ghostname}Right 0.4s steps(2) infinite;`;
-					// console.log
-					newPosition.classList.add(`${ghostname}${ghost.animation}`);
-					if(ghost.position === pacman.position){
-						loseLife();
-					}
-				}else{
-					// newPosition.style.animation = `${ghostname}Scared 0.4s steps(2) infinite;`
-					// newPosition.classList.add(`${ghostname}${ghost.animation}`);
-					if(ghost.position === pacman.position){
-						score+=200;
-					}else{
-						ghost.animation  = "Scared";
+					ghost.position = ghost.position+1;
+					const newPosition = document.querySelector(`#tile${ghost.position}`);
+					// newPosition.classList.add(`${ghostname}`);
+					if(!empowered){
+						ghost.animation = "Right";
 						newPosition.classList.add(`${ghostname}${ghost.animation}`);
+						if(ghost.position === pacman.position){
+							loseLife();
+						}
+					}else{
+						if(ghost.position === pacman.position){
+							score+=200;
+						}else{
+							ghost.animation  = "Scared";
+							newPosition.classList.add(`${ghostname}${ghost.animation}`);
+						}
 					}
-				}
-				
+					
 			}else if(direction ===2){
-				ghost.position = upMove;
-				const newPosition = document.querySelector(`#tile${ghost.position}`)
-				// newPosition.classList.add(`${ghostname}`);
-				if(!empowered){
-					// newPosition.style.animation = `${ghostname}Up 0.4s steps(2) infinite;`;
-					ghost.animation = "Up";
-					newPosition.classList.add(`${ghostname}${ghost.animation}`);
-					if(ghost.position === pacman.position){
-						loseLife();
-					}
-				}else{
-					if(ghost.position === pacman.position){
-						score+=200;
-					}else{
-						ghost.animation  = "Scared";
+					ghost.position = ghost.position-28;
+					const newPosition = document.querySelector(`#tile${ghost.position}`)
+					if(!empowered){
+						ghost.animation = "Up";
 						newPosition.classList.add(`${ghostname}${ghost.animation}`);
+						if(ghost.position === pacman.position){
+							loseLife();
+						}
+					}else{
+						if(ghost.position === pacman.position){
+							score+=200;
+						}else{
+							ghost.animation  = "Scared";
+							newPosition.classList.add(`${ghostname}${ghost.animation}`);
+						}
 					}
-				}
-				
 			}else if(direction === 3){
-				ghost.position = downMove;
+				ghost.position = ghost.position+28;
 				const newPosition = document.querySelector(`#tile${ghost.position}`)
-				// newPosition.classList.add(`${ghostname}`);
 				if(!empowered){
 					ghost.animation = "Down";
 					newPosition.classList.add(`${ghostname}${ghost.animation}`);
-					// newPosition.style.animation = `${ghostname}Down 0.4s steps(2) infinite;`;
 					if(ghost.position === pacman.position){
 						loseLife();
 					}
 				}else{
 					if(ghost.position === pacman.position){
 						score+=200;
-						ghost.position = ghost.spawn;
 					}else{
 						ghost.animation  = "Scared";
 						newPosition.classList.add(`${ghostname}${ghost.animation}`);
 					}
 				}
-				
-			}
-		}else{
-			if(ghost.position === pacman.position){
-				loseLife()
-			}
+			}	
 		}
 	}
+
 }
 
 const loseSequence = ()=>{
@@ -940,14 +672,11 @@ const loseLife = ()=>{
 }
 const playGame = ()=>{
 	updatePostion();
-	redGhost.target = pacman.position;
-	blueGhost.target = pacman.position;
-	pinkGhost.target = pacman.position;
-	orangeGhost.target = pacman.position;
 	ghostMoveCloser(redGhost, "redGhost");
 	ghostMoveCloser(blueGhost, "blueGhost");
 	ghostMoveCloser(pinkGhost, "pinkGhost");
 	ghostMoveCloser(orangeGhost, "orangeGhost");
+	// ghostMoveCloser(redGhost, "redGhost")
 	hasWon();
 	scoreElem.textContent = score;
 	livesElem.textContent = `x${pacman.lives}`
@@ -956,12 +685,10 @@ const updatePostion = ()=>{
 	let proposedPosition;
 	let modifier;
 	const currentPosition =  document.querySelector(`#tile${pacman.position}`);
-	// console.log(pacman.position)
-	if(pacman.lastdirection === "right"){
-		
+	if(pacman.lastdirection === "right"){	
 		if(tunnelTiles.includes(pacman.position) && document.querySelector(`#tile${pacman.position+1}`).classList.contains("blocked")){
 			modifier =-27;
-			proposedPosition = document.querySelector(`#tile${(pacman.position+modifier)%boardSize}`)
+			proposedPosition = document.querySelector(`#tile${(pacman.position+modifier)%boardSize}`);
 
 		}else{
 			modifier =1;
@@ -971,14 +698,11 @@ const updatePostion = ()=>{
 	}else if(pacman.lastdirection === "left"){
 		if( tunnelTiles.includes(pacman.position) && document.querySelector(`#tile${pacman.position-1}`).classList.contains("blocked")){
 			modifier =+27;
-			proposedPosition = document.querySelector(`#tile${(pacman.position+modifier)%boardSize}`)
-
+			proposedPosition = document.querySelector(`#tile${(pacman.position+modifier)%boardSize}`);
 		}else{
 			modifier = -1;
 			proposedPosition = document.querySelector(`#tile${(pacman.position+modifier)%boardSize}`);
 		}
-		
-		// proposedPosition.style.transform = "rotate(180deg)";
 	}else if(pacman.lastdirection === "up"){
 		if(tunnelTiles.includes(pacman.position) && document.querySelector(`#tile${pacman.position-28}`).classList.contains("blocked")){
 			modifier = -boardSize;
@@ -988,8 +712,6 @@ const updatePostion = ()=>{
 			modifier = -28;
 			proposedPosition = document.querySelector(`#tile${(pacman.position+modifier)%boardSize}`);
 		}
-		
-		// proposedPosition.style.transform = "rotate(270deg)";
 	}else{
 		if(tunnelTiles.includes(pacman.position) && document.querySelector(`#tile${pacman.position+28}`).classList.contains("blocked")){
 			modifier = boardSize;
@@ -997,20 +719,15 @@ const updatePostion = ()=>{
 		}else{
 			modifier = 28;
 			proposedPosition = document.querySelector(`#tile${(pacman.position+modifier)%boardSize}`);
-		}
-		// proposedPosition.style.transform = "rotate(90deg)";
+		};
 	}
-	console.log(`#tile${proposedPosition}`);
+	// console.log(`#tile${proposedPosition}`);
 	if(proposedPosition.classList.contains("blocked")){
-		// document.querySelector(`#tile${pacman.position}`).classList.remove("pacman");
 		currentPosition.classList.remove("left", "right", "up", "down");
 		currentPosition.classList.add(pacman.lastdirection);
-		// currentPosition.style.
 	}else{
 			currentPosition.classList.remove("pacman","left", "right", "up", "down");
-			
 			if(proposedPosition.classList.contains("pinkGhost") || proposedPosition.classList.contains("redGhost") || proposedPosition.classList.contains("orangeGhost") || proposedPosition.classList.contains("blueGhost")){
-				// currentPosition.classList.remove("pacman");
 				loseLife()
 			}else if(proposedPosition.classList.contains("dot")){
 				score+=10;
@@ -1031,36 +748,25 @@ const updatePostion = ()=>{
 
 	}
 }
-// const calculateOptimalDirection =  ()=>{
-// 	const bestdirection = [];
-// 	visited =[];
-// 	const tiles = document.querySelectorAll(".tile");
-// 	tiles.forEach((tile, index) => {
-// 		if(tile.classList.includes("blocked")){
-// 			bestdirection.push(Array(tiles.length).fill(null));
-// 		}else{
-// 			const divineInspiration = Array(tiles.length).fill(null);
-// 			for (let j = index; j < tiles.length; j++) {
-// 				if()
-				
-// 			}
-// 		}
-// 		visited.push(index);
-// 	});
-// }
+
 const init = ()=>{
+
 	prevBoardElem.style.visibility ="hidden";
 	nextBoardElem.style.visibility ="hidden";
 	playBoardElem.style.visibility ="hidden";
 	pacman.position = pacman.spawn;
+	pacman.lastdirection = null;
 	pacman.lives = 3;
 	score = 0;
 	beginChase = false;
-	removeTiles();
-	setTiles();
+	redGhost.position =  redGhost.spawn;
+	blueGhost.position =  blueGhost.spawn;
+	pinkGhost.position =  pinkGhost.spawn;
+	orangeGhost.position =  orangeGhost.spawn;
+	// clearInterval(gameRun);
 	boardSelector(currentboard);
 	document.addEventListener("keydown",(event)=>{
-		console.log(event.key);
+		// console.log(event.key);
 		// const 
 		if(event.key === "ArrowRight" || event.key.toLowerCase() === "d"){
 			pacman.lastdirection = "right";
@@ -1078,18 +784,23 @@ const init = ()=>{
 
 setTiles();
 boardSelector(0);
-console.log(bfs(pinkGhost.position, pacman.position));
+// console.log(bfs(pinkGhost.position, pacman.position));
 //Eventlistener
 nextBoardElem.addEventListener("click", ()=>{
 	currentboard = (currentboard+1)%boardAmount;
+	removeTiles();
+	setTiles();
 	boardSelector(currentboard);
 });
 prevBoardElem.addEventListener("click", ()=>{
 	currentboard = (currentboard-1)%boardAmount;
-
+	removeTiles();
+	setTiles();
 	boardSelector(currentboard);
 });
 playBoardElem.addEventListener("click", ()=>{
+	removeTiles();
+	setTiles();
 	init();
 })
 
