@@ -48,9 +48,12 @@ let gameRun;
 let beginChase;
 let pixels = [];
 // let visited =[]
+let currentlyDead  = [];
+let ghostDeathTimer;
 let tunnelTiles;
 let emptyTiles;
 let boardSize = 868;
+let ghostBounty = 200;
 let imageLocation = "url('../assets/Arcade - Pac-Man - Map.PNG')";
 //Cached Document Elements
 const boardElement = document.querySelector("#display-board");
@@ -60,7 +63,7 @@ const prevBoardElem =  document.querySelector("#previousBoard");
 const playBoardElem =  document.querySelector("#playBoard");
 const scoreElem  =  document.querySelector("#score");
 const livesElem =  document.querySelector("#lives");
-
+const gameStatus = document.querySelector("#game-status")
 //Functions
 const setTiles= ()=>{
 for(let i=0; i<boardSize; i++){
@@ -397,6 +400,7 @@ const boardLayout1 = ()=>{
 		// }
 	});
 }
+
 	// const movementAlgorithm =(currentPosition, targetPosition)=>{
 	// 	if(currentPosition === targetPosition){
 	// 		console.log("is here the issue")
@@ -509,13 +513,17 @@ const boardLayout1 = ()=>{
 
 // }
 
-const bfs = (startPos, targetPos)=>{
+const bfs = (startPos, targetPos, whatToRemove = 0)=>{
 	const queue = [startPos];
 	const visitedTiles = Array(boardSize).fill(false);
 	const distances = Array(boardSize).fill(Infinity);
 	distances[startPos] =0;
 	visitedTiles[startPos] = true;
 	const pathToTarget = Array(boardSize).fill(`${startPos}`);
+	if(startPos === targetPos){
+		clearInterval(ghostDeathTimer);
+		currentlyDead.splice(whatToRemove, 1);
+	}
 	while(queue.length >0){
 		const currentPos = queue.shift();
 		// console.log(currentPos)
@@ -556,97 +564,132 @@ const bfs = (startPos, targetPos)=>{
 	return Infinity;
 }
 
-
+const ghostDeath = (ghost)=>{
+	currentlyDead.push(ghost);
+	score+=ghostBounty;
+	ghostBounty+=200;
+	ghostDeathTimer = setInterval(()=>{
+		const direction = bfs(ghost.position, ghost.spawn, currentlyDead.indexOf(ghost));
+		document.querySelector(`#tile${ghost.position}`).classList.remove(`${ghost.animation}`);
+		if(direction ==0){
+			ghost.position = ghost.position -1;
+			ghost.animation = "eyesLeft";
+		}else if(direction ==1){
+			ghost.position = ghost.position +1;
+			ghost.animation = "eyesRight";
+		}else if(direction ==2){
+			ghost.position = ghost.position -28;
+			ghost.animation = "eyesUp";
+		}else if(direction ==3){
+			ghost.position = ghost.position +28;
+			ghost.animation = "eyesDown";
+		}
+		document.querySelector(`#tile${ghost.position}`).classList.add(`${ghost.animation}`);
+	}, 25)
+	document.querySelector(`#tile${ghost.position}`).classList.remove(`${ghost.animation}`);
+	// ghost.position = ghost.spwan;
+	
+}
 const ghostMoveCloser = (ghost, ghostname)=>{
 	if(beginChase){
-		let direction = bfs(ghost.position, pacman.position);
-		console.log(ghostname, direction)
-		if(direction!= Infinity){
-			document.querySelector(`#tile${ghost.position}`).classList.remove(`${ghostname}${ghost.animation}`);
-			if(direction === 0){
-				console.log(ghost.position)
-				ghost.position = ghost.position-1;
-				const newPosition = document.querySelector(`#tile${ghost.position}`);
-				// newPosition.classList.add(`${ghostname}`);
-				if(!empowered){
-					ghost.animation = "Left";
+		if(currentlyDead.includes(ghost)){
 
-					newPosition.classList.add(`${ghostname}${ghost.animation}`);
-					if(ghost.position === pacman.position){
-						loseLife();
-					}
-				
-				}else{
-					
-					if(ghost.position === pacman.position){
-						score+=200;
-					}else{
-						ghost.animation  = "Scared";
-						newPosition.classList.add(`${ghostname}${ghost.animation}`);
-					}
-				}
-			
-			}else if(direction === 1){
-					ghost.position = ghost.position+1;
+		}else{
+			let direction = bfs(ghost.position, pacman.position);
+			console.log(ghostname, direction)
+			if(direction!= Infinity){
+				document.querySelector(`#tile${ghost.position}`).classList.remove(`${ghostname}${ghost.animation}`);
+				if(direction === 0){
+					console.log(ghost.position)
+					ghost.position = ghost.position-1;
 					const newPosition = document.querySelector(`#tile${ghost.position}`);
 					// newPosition.classList.add(`${ghostname}`);
 					if(!empowered){
-						ghost.animation = "Right";
+						ghost.animation = "Left";
+
 						newPosition.classList.add(`${ghostname}${ghost.animation}`);
 						if(ghost.position === pacman.position){
 							loseLife();
 						}
+					
 					}else{
+						
 						if(ghost.position === pacman.position){
-							score+=200;
+							// currentlyDead.push(ghost);
+							ghostDeath(ghost);
 						}else{
 							ghost.animation  = "Scared";
 							newPosition.classList.add(`${ghostname}${ghost.animation}`);
 						}
 					}
-					
-			}else if(direction ===2){
-					ghost.position = ghost.position-28;
+				
+				}else if(direction === 1){
+						ghost.position = ghost.position+1;
+						const newPosition = document.querySelector(`#tile${ghost.position}`);
+						// newPosition.classList.add(`${ghostname}`);
+						if(!empowered){
+							ghost.animation = "Right";
+							newPosition.classList.add(`${ghostname}${ghost.animation}`);
+							if(ghost.position === pacman.position){
+								loseLife();
+							}
+						}else{
+							if(ghost.position === pacman.position){
+								// currentlyDead.push(ghost);
+								ghostDeath(ghost);
+							}else{
+								ghost.animation  = "Scared";
+								newPosition.classList.add(`${ghostname}${ghost.animation}`);
+							}
+						}
+						
+				}else if(direction ===2){
+						ghost.position = ghost.position-28;
+						const newPosition = document.querySelector(`#tile${ghost.position}`)
+						if(!empowered){
+							ghost.animation = "Up";
+							newPosition.classList.add(`${ghostname}${ghost.animation}`);
+							if(ghost.position === pacman.position){
+								loseLife();
+							}
+						}else{
+							if(ghost.position === pacman.position){
+								ghostDeath(ghost);
+							}else{
+								ghost.animation  = "Scared";
+								newPosition.classList.add(`${ghostname}${ghost.animation}`);
+							}
+						}
+				}else if(direction === 3){
+					ghost.position = ghost.position+28;
 					const newPosition = document.querySelector(`#tile${ghost.position}`)
 					if(!empowered){
-						ghost.animation = "Up";
+						ghost.animation = "Down";
 						newPosition.classList.add(`${ghostname}${ghost.animation}`);
 						if(ghost.position === pacman.position){
 							loseLife();
 						}
 					}else{
 						if(ghost.position === pacman.position){
-							score+=200;
+							ghostDeath(ghost);
 						}else{
 							ghost.animation  = "Scared";
 							newPosition.classList.add(`${ghostname}${ghost.animation}`);
 						}
 					}
-			}else if(direction === 3){
-				ghost.position = ghost.position+28;
-				const newPosition = document.querySelector(`#tile${ghost.position}`)
-				if(!empowered){
-					ghost.animation = "Down";
-					newPosition.classList.add(`${ghostname}${ghost.animation}`);
-					if(ghost.position === pacman.position){
-						loseLife();
-					}
-				}else{
-					if(ghost.position === pacman.position){
-						score+=200;
-					}else{
-						ghost.animation  = "Scared";
-						newPosition.classList.add(`${ghostname}${ghost.animation}`);
-					}
-				}
-			}	
+				}	
+			}
 		}
+		
 	}
 
 }
 
 const loseSequence = ()=>{
 	clearInterval(gameRun);
+	clearInterval(ghostDeathTimer);
+
+	gameStatus.textContent = "GAME OVER";
 	prevBoardElem.style.visibility ="visible";
 	nextBoardElem.style.visibility ="visible";
 	playBoardElem.style.visibility ="visible";
@@ -655,6 +698,7 @@ const hasWon = ()=>{
 	const remainingDots = document.querySelectorAll(".dot")
 	if(remainingDots.length == 0 ){
 		clearInterval(gameRun);
+		gameStatus = "YOU WIN";
 		prevBoardElem.style.visibility ="visible";
 		nextBoardElem.style.visibility ="visible";
 		playBoardElem.style.visibility ="visible";
@@ -673,9 +717,9 @@ const loseLife = ()=>{
 const playGame = ()=>{
 	updatePostion();
 	ghostMoveCloser(redGhost, "redGhost");
-	ghostMoveCloser(blueGhost, "blueGhost");
-	ghostMoveCloser(pinkGhost, "pinkGhost");
-	ghostMoveCloser(orangeGhost, "orangeGhost");
+	// ghostMoveCloser(blueGhost, "blueGhost");
+	// ghostMoveCloser(pinkGhost, "pinkGhost");
+	// ghostMoveCloser(orangeGhost, "orangeGhost");
 	// ghostMoveCloser(redGhost, "redGhost")
 	hasWon();
 	scoreElem.textContent = score;
@@ -737,6 +781,7 @@ const updatePostion = ()=>{
 			}else if(proposedPosition.classList.contains("powerPellet")){
 				empowered =true;
 				setTimeout(()=>{empowered =false}, 8000)
+				ghostBounty =200;
 				score+=50;
 				proposedPosition.classList.remove("powerPellet");
 				pacman.position = pacman.position+modifier;
@@ -758,6 +803,7 @@ const init = ()=>{
 	pacman.lastdirection = null;
 	pacman.lives = 3;
 	score = 0;
+	scoreElem.textContent = "00";
 	beginChase = false;
 	redGhost.position =  redGhost.spawn;
 	blueGhost.position =  blueGhost.spawn;
@@ -765,21 +811,33 @@ const init = ()=>{
 	orangeGhost.position =  orangeGhost.spawn;
 	// clearInterval(gameRun);
 	boardSelector(currentboard);
-	document.addEventListener("keydown",(event)=>{
-		// console.log(event.key);
-		// const 
-		if(event.key === "ArrowRight" || event.key.toLowerCase() === "d"){
-			pacman.lastdirection = "right";
-		}else if(event.key === "ArrowLeft" || event.key.toLowerCase() === "a"){
-			pacman.lastdirection = "left";
-		}else if(event.key === "ArrowDown" || event.key.toLowerCase() === "s"){
-			pacman.lastdirection = "down";
-		}else if(event.key=== "ArrowUp" || event.key.toLowerCase() == "w"){
-			pacman.lastdirection = "up";
-		}
-	});
-	setTimeout(()=>{beginChase =true},3000);
-	gameRun = setInterval(playGame, 500);
+	// gameStatus.textContent  = "GAME START";
+	let countDown =4;
+	let counter = setInterval(()=>{
+		countDown-=1
+		gameStatus.textContent = countDown;
+	}, 1000)
+	setTimeout(()=>{
+		clearInterval(counter);
+		gameStatus.textContent = "";
+		document.addEventListener("keydown",(event)=>{
+			// console.log(event.key);
+			// const 
+			if(event.key === "ArrowRight" || event.key.toLowerCase() === "d"){
+				pacman.lastdirection = "right";
+			}else if(event.key === "ArrowLeft" || event.key.toLowerCase() === "a"){
+				pacman.lastdirection = "left";
+			}else if(event.key === "ArrowDown" || event.key.toLowerCase() === "s"){
+				pacman.lastdirection = "down";
+			}else if(event.key=== "ArrowUp" || event.key.toLowerCase() == "w"){
+				pacman.lastdirection = "up";
+			}
+		});
+		setTimeout(()=>{beginChase =true},3000);
+		gameRun = setInterval(playGame, 300);
+	}, 4000);
+	
+	
 }
 
 setTiles();
@@ -801,6 +859,7 @@ prevBoardElem.addEventListener("click", ()=>{
 playBoardElem.addEventListener("click", ()=>{
 	removeTiles();
 	setTiles();
+	gameStatus.textContent  = "GAME START";
 	init();
 })
 

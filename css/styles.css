@@ -31,6 +31,11 @@ main{
     align-items: center;
     /* flex-direction: row; */
 }
+#game-status{
+    position: absolute;
+    font-size: 40px;
+    z-index: 3;
+}
 .dot div{
     width: 8px;
     height: 8px;
@@ -43,7 +48,11 @@ main{
     background-image: url('../assets/Pac-Man - All Assets_Palettes.png');
 	background-position : -903px -168px;
 	background-repeat: no-repeat;
+    animation: blinkingPellet 0.4s step(2) infinite;
     /* z-index: -1; */
+}
+@keyframes identifier {
+    
 }
 /* .pinkGhost{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
@@ -316,7 +325,29 @@ main{
     from {background-position:-503px -337px;}
     to {background-position:-503px -303px;}
 }
-
+.eyesLeft{
+    background-image: url('../assets/Pac-Man - All Assets_Palettes.png');
+     /* background-position:-269px -83px; */
+    background-repeat: no-repeat;
+    background-position: -269px -269px;
+    /* animation: orangeGhostDown 0.4s steps(2) infinite; */
+}
+.eyesRight{
+    background-image: url('../assets/Pac-Man - All Assets_Palettes.png');
+        /* background-position:-269px -83px; */
+    background-repeat: no-repeat;
+    background-position: -201px -269px;
+}
+.eyesUp{
+    background-image: url('../assets/Pac-Man - All Assets_Palettes.png');
+    background-repeat: no-repeat;
+    background-position: -303px -269px;
+}
+.eyesDown{
+    background-image: url('../assets/Pac-Man - All Assets_Palettes.png');
+    background-repeat: no-repeat;
+    background-position: -235px -269px;
+}
 .tile{
     width: 16px;
     height: 16px;
