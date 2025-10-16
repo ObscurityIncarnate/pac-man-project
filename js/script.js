@@ -536,7 +536,7 @@ const bfs = (startPos, targetPos, whatToRemove = 0)=>{
 				return 1;
 			}else if(nextMove  == startPos-28){
 				return 2;
-			}else{
+			}else if(nextMove == startPos+28){
 				return 3;
 			}
 			// return[ distances[currentPos], nextMove];
@@ -587,7 +587,7 @@ const ghostDeath = (ghost)=>{
 		document.querySelector(`#tile${ghost.position}`).classList.add(`${ghost.animation}`);
 	}, 25)
 	document.querySelector(`#tile${ghost.position}`).classList.remove(`${ghost.animation}`);
-	// ghost.position = ghost.spwan;
+
 	
 }
 const ghostMoveCloser = (ghost, ghostname)=>{
