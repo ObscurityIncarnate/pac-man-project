@@ -771,7 +771,8 @@ const updatePostion = ()=>{
 		currentPosition.classList.add(pacman.lastdirection);
 	}else{
 			currentPosition.classList.remove("pacman","left", "right", "up", "down");
-			if(proposedPosition.classList.contains("pinkGhost") || proposedPosition.classList.contains("redGhost") || proposedPosition.classList.contains("orangeGhost") || proposedPosition.classList.contains("blueGhost")){
+			
+			if(cantPassThrough.slice(1).some(className => { return proposedPosition.classList.contains(className) })){
 				loseLife()
 			}else if(proposedPosition.classList.contains("dot")){
 				score+=10;
