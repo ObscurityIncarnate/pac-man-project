@@ -12,6 +12,7 @@ const cantPassThrough = ["blocked","pinkGhostLeft", "pinkGhostUp","pinkGhostDown
 //Variables
 let userName;
 let score;
+let step = 0
 let currentboard=0;
 let pacman = {
 	position: null,
@@ -46,6 +47,7 @@ let empowered;
 let gameRun;
 let beginChase;
 let pixels = [];
+// let visited =[]
 let tunnelTiles;
 let emptyTiles;
 let boardSize = 868;
@@ -533,6 +535,155 @@ const calculateDistance = (objectPosition, targetPosition)=>{
 		return Math.sqrt(((xObjectComponent-xTargetComponent)**2) + ((yObjectComponent-yTargetComponent)**2))
 	}
 }
+
+	// const movementAlgorithm =(currentPosition, targetPosition)=>{
+	// 	if(currentPosition === targetPosition){
+	// 		console.log("is here the issue")
+	// 		return step;
+	// 	}else if(document.querySelector(`#tile${currentPosition}`).classList.contains("blocked")||visited.includes(currentPosition)){
+	// 		// console.log("is here the issue")
+	// 		return undefined;
+	// 	}
+	// 	// else if(visited.includes(currentPosition)){
+	// 	// 	// console.log("is here the issue")
+	// 	// 	return undefined;
+	// 	// }
+	// 	else{
+	// 		step +=1;
+	// 		visited.push(currentPosition);
+	// 		const leftMove =  currentPosition -1;
+	// 		const rightMove =  currentPosition +1;
+	// 		const upMove =  currentPosition -28;
+	// 		const downMove =  currentPosition +28;
+	// 		const possibleMoves = [leftMove, rightMove,  upMove, downMove];
+	// 		const lengthCount = [0,0,0,0];
+			
+	// 		possibleMoves.forEach((move, index)=>{
+	// 			const output = movementAlgorithm(move, targetPosition);
+	// 			if(typeof output === "number" && !isNaN(output)){
+	// 				console.log(output)
+	// 				lengthCount[index] = step;
+	// 			} else{
+	// 				lengthCount[index] = null;
+	// 			}
+	// 		})
+	// 		// const lengths = [Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER];
+	// 		// if(!visited.includes(leftMove)){
+	// 			// visited.push(leftMove);
+	// 			// lengths[0]= dijkstraAlgorithm(leftMove, targetPosition) +1; 
+	// 		// }
+	// 		// if(!visited.includes(rightMove)){
+	// 			// visited.push(rightMove);
+	// 			// lengths[1] = dijkstraAlgorithm(rightMove, targetPosition) +1;
+	// 		// }
+	// 		// if(!visited.includes(upMove)){
+	// 			// visited.push(upMove);
+	// 			// lengths[2] = dijkstraAlgorithm(upMove, targetPosition) +1;
+	// 		// }
+	// 		// if(!visited.includes(downMove)){
+	// 			// visited.push(downMove);
+	// 			// lengths[3] = dijkstraAlgorithm(downMove, targetPosition) +1;
+	// 		// }
+
+	// 		// let smallestDistance = Number.MAX_SAFE_INTEGER;
+	// 		// let direction;
+	// 		// lengths.forEach((length, index)=>{
+	// 		// 	if(empowered){
+	// 		// 		smallestDistance = Number.MIN_SAFE_INTEGER;
+	// 		// 		if(length>smallestDistance){
+	// 		// 			smallestDistance = length;
+	// 		// 			direction = index;
+	// 		// 		}
+	// 		// 	}else{
+	// 		// 		if(length<smallestDistance){
+	// 		// 			smallestDistance = length;
+	// 		// 			direction = index;
+	// 		// 		}
+	// 		// 	}
+				
+	// 		// })
+	// 		console.log(lengthCount)
+	// 		return empowered ? Math.max(lengthCount.filter(number => {(typeof number =="number" && !isNaN(number))})) : Math.min(lengthCount.filter(number => {(typeof number =="number" && !isNaN(number))}));
+	// 		// console.log([dijkstraAlgorithm(leftMove, targetPosition) , dijkstraAlgorithm(rightMove, targetPosition) , dijkstraAlgorithm(upMove, targetPosition) , dijkstraAlgorithm(downMove, targetPosition) ])
+	// 		// if(empowered){
+	// 		// 	return Math.max(...[dijkstraAlgorithm(leftMove, targetPosition) +1 , dijkstraAlgorithm(rightMove, targetPosition) +1, dijkstraAlgorithm(upMove, targetPosition)+1 , dijkstraAlgorithm(downMove, targetPosition)+1 ].filter((pathway) => { return !isNaN(pathway)}));
+	// 		// }else{
+	// 		// 	return Math.min(...[dijkstraAlgorithm(leftMove, targetPosition) , dijkstraAlgorithm(rightMove, targetPosition) , dijkstraAlgorithm(upMove, targetPosition) , dijkstraAlgorithm(downMove, targetPosition) ].filter((pathway) => { return !isNaN(pathway)}));
+	// 		// }
+	// 		// return direction;
+	// 	}
+		
+	// }
+
+// const dijkstraAlgorithm = (startPos, targetPos)=>{
+// 	const unvisitedNodes  = [];
+// 	document.querySelectorAll(".tile").forEach((tile, index)=>{
+// 		unvisitedNodes.push(index);
+// 	});
+// 	const visitedNodes = [];
+// 	const distance = Array(boardSize).fill(Number.MAX_SAFE_INTEGER);
+// 	const distanceFrom = Array(boardSize).fill(Number.MAX_SAFE_INTEGER);
+// 	distance[startPos] = 0; 
+// 	const currentPosition = startPos;
+// 	// unvisitedNodes.forEach((location)=>{
+// 	const neighbours = [currentPosition-1, currentPosition+1, currentPosition-28, currentPosition+28];
+// 	neighbours.forEach((neighbour)=>{
+// 			if(document.querySelector(`#tile${neighbour}`).classList.includes("blocked")){
+
+// 			}else{
+// 				if(distance[currentPosition]+1 <distance[neighbour]){
+// 					distance[neighbour] = distance[currentPosition] +1;
+// 					distanceFrom[neighbour] =currentPosition;
+// 				}
+// 			}
+// 		});
+	
+// 	// })
+// 	visitedNodes.push(currentPosition);
+// 	unvisitedNodes.splice(currentPosition);
+// 	const eligihb
+// 	currentPosition = Math.min(...neighbours.filter((neighbour)=>{
+// 		return !visitedNodes.includes(neighbour)
+// 	}))
+
+// }
+
+const bfs = (startPos, targetPos)=>{
+	const queue = [startPos];
+	const visitedTiles = Array(boardSize).fill(false);
+	const distances = Array(boardSize).fill(Infinity);
+	distances[startPos] =0;
+	visitedTiles[startPos] = true;
+	const pathToTarget = Array(boardSize).fill(`${startPos}`);
+	while(queue.length >0){
+		const currentPos = queue.shift();
+		console.log(currentPos)
+		if(currentPos === targetPos){
+			return[ distances[currentPos], pathToTarget[currentPos]];
+		}
+		visitedTiles[currentPos] = true;
+		const neighbours = [currentPos-1, currentPos+1, currentPos-28, currentPos+28];
+		for(const neighbour of neighbours){
+			console.log(neighbour)
+			if(neighbour <0 || neighbour>boardSize-1) continue;
+			// if ((currentPos % 28 === 0 && neighbour === currentPos - 1) || (currentPos % 28 === 28 - 1 && neighbour === currentPos + 1)) {
+        	// 	continue;
+      		// }
+			if(document.querySelector(`#tile${neighbour}`).classList.contains("blocked") || visitedTiles[neighbour] === true) continue;
+			
+			queue.push(neighbour);
+			// distances[neighbour] = distances[currentPos]+1;
+			visitedTiles[neighbour] = true;
+			pathToTarget[neighbour] = pathToTarget[currentPos] +`->${neighbour}`;
+			// console.log(neighbour)
+			
+		}
+
+	}
+	return Infinity;
+}
+
+
 const ghostMoveCloser = (ghost, ghostname)=>{
 	if(beginChase){
 		const leftMove =  ghost.position -1;
@@ -544,7 +695,9 @@ const ghostMoveCloser = (ghost, ghostname)=>{
 		distanceArray.push(calculateDistance(rightMove, ghost.target ));
 		distanceArray.push(calculateDistance(upMove, ghost.target));
 		distanceArray.push(calculateDistance(downMove, ghost.target));
-		let direction;
+		// visited =[];
+		// let step =0;
+		let direction = bf(ghost.position, pacman.position);
 		if(!empowered){
 			let minDistance = Number.MAX_SAFE_INTEGER;
 			// console.log(minDistance)
@@ -766,6 +919,15 @@ const loseSequence = ()=>{
 	nextBoardElem.style.visibility ="visible";
 	playBoardElem.style.visibility ="visible";
 }
+const hasWon = ()=>{
+	const remainingDots = document.querySelectorAll(".dot")
+	if(remainingDots.length == 0 ){
+		clearInterval(gameRun);
+		prevBoardElem.style.visibility ="visible";
+		nextBoardElem.style.visibility ="visible";
+		playBoardElem.style.visibility ="visible";
+	}
+}
 const loseLife = ()=>{
 
 	document.querySelector(`#tile${pacman.position}`).classList.remove("pacman", pacman.lastdirection);
@@ -786,6 +948,7 @@ const playGame = ()=>{
 	ghostMoveCloser(blueGhost, "blueGhost");
 	ghostMoveCloser(pinkGhost, "pinkGhost");
 	ghostMoveCloser(orangeGhost, "orangeGhost");
+	hasWon();
 	scoreElem.textContent = score;
 	livesElem.textContent = `x${pacman.lives}`
 }
@@ -868,7 +1031,23 @@ const updatePostion = ()=>{
 
 	}
 }
-
+// const calculateOptimalDirection =  ()=>{
+// 	const bestdirection = [];
+// 	visited =[];
+// 	const tiles = document.querySelectorAll(".tile");
+// 	tiles.forEach((tile, index) => {
+// 		if(tile.classList.includes("blocked")){
+// 			bestdirection.push(Array(tiles.length).fill(null));
+// 		}else{
+// 			const divineInspiration = Array(tiles.length).fill(null);
+// 			for (let j = index; j < tiles.length; j++) {
+// 				if()
+				
+// 			}
+// 		}
+// 		visited.push(index);
+// 	});
+// }
 const init = ()=>{
 	prevBoardElem.style.visibility ="hidden";
 	nextBoardElem.style.visibility ="hidden";
@@ -899,6 +1078,7 @@ const init = ()=>{
 
 setTiles();
 boardSelector(0);
+console.log(bfs(pinkGhost.position, pacman.position));
 //Eventlistener
 nextBoardElem.addEventListener("click", ()=>{
 	currentboard = (currentboard+1)%boardAmount;
