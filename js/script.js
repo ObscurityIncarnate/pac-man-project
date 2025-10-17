@@ -55,7 +55,7 @@ let tunnelTiles;
 let emptyTiles;
 let boardSize = 868;
 let ghostBounty = 200;
-let imageLocation = "url('../assets/Arcade-Pac-Man-Map.png')";
+let imageLocation = "url('./assets/Arcade-Pac-Man-Map.png')";
 
 //Cached Document Elements
 const boardElement = document.querySelector("#display-board");

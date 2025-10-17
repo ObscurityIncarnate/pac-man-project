@@ -53,6 +53,6 @@ if pacman wins the game is over
 victory message goes across the board either you win. or you lost
 after game is over show leader
 ## Special Thanks and Credits
-Character Sprites provided by Caylie C [available on](https://www.spriters-resource.com/arcade/pacman/asset/159361/)
+Character Sprites provided by Caylie C [available on](https://www.spriters-resource.com/arcade/pacman/asset/159361/). <br/>
 Map Sprites provided by Superjustinbros [avaialable on](https://www.spriters-resource.com/arcade/pacman/asset/52631/)
 This could not have been possible without their great resources.
