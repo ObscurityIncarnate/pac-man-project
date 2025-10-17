@@ -39,7 +39,6 @@ button{
 }
 #playBoard{
     margin-top: 40px;
-    /* color: blue; */
 }
 .dot div{
     width: 8px;
@@ -109,31 +108,26 @@ button{
 
 .blueGhostLeft{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
-	/* background-position:-269px -83px; */
 	background-repeat: no-repeat;
     animation: blueGhostLeft 0.4s steps(2) infinite;
 }
 .blueGhostUp{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
-	/* background-position:-269px -83px; */
 	background-repeat: no-repeat;
     animation: blueGhostUp 0.4s steps(2) infinite;
 }
 .blueGhostDown{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
-	/* background-position:-269px -83px; */
 	background-repeat: no-repeat;
     animation: blueGhostDown 0.4s steps(2) infinite;
 }
 .blueGhostRight{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
-	/* background-position:-269px -83px; */
 	background-repeat: no-repeat;
     animation: blueGhostRight 0.4s steps(2) infinite;
 }
 .blueGhostScared{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
-	/* background-position:-269px -83px; */
 	background-repeat: no-repeat;
     animation: blueGhostScared 0.4s steps(2) infinite;
 }
@@ -159,31 +153,26 @@ button{
 }
 .redGhostLeft{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
-	/* background-position:-269px -83px; */
 	background-repeat: no-repeat;
     animation: redGhostLeft 0.4s steps(2) infinite;
 }
 .redGhostUp{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
-	/* background-position:-269px -83px; */
 	background-repeat: no-repeat;
     animation: redGhostUp 0.4s steps(2) infinite;
 }
 .redGhostDown{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
-	/* background-position:-269px -83px; */
 	background-repeat: no-repeat;
     animation: redGhostDown 0.4s steps(2) infinite;
 }
 .redGhostRight{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
-	/* background-position:-269px -83px; */
 	background-repeat: no-repeat;
     animation: redGhostRight 0.4s steps(2) infinite;
 }
 .redGhostScared{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
-	/* background-position:-269px -83px; */
 	background-repeat: no-repeat;
     animation: redGhostScared 0.4s steps(2) infinite;
 }
@@ -210,25 +199,21 @@ button{
 
 .orangeGhostLeft{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
-	/* background-position:-269px -83px; */
 	background-repeat: no-repeat;
     animation: orangeGhostLeft 0.4s steps(2) infinite;
 }
 .orangeGhostUp{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
-	/* background-position:-269px -83px; */
 	background-repeat: no-repeat;
     animation: orangeGhostUp 0.4s steps(2) infinite;
 }
 .orangeGhostDown{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
-	/* background-position:-269px -83px; */
 	background-repeat: no-repeat;
     animation: orangeGhostDown 0.4s steps(2) infinite;
 }
 .orangeGhostRight{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
-	/* background-position:-269px -83px; */
 	background-repeat: no-repeat;
     animation: orangeGhostRight 0.4s steps(2) infinite;
 }
