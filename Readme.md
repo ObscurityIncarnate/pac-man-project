@@ -3,6 +3,9 @@
 
 ## Tehcnologies Used:
 HTML, CSS, Javascript.
+## Wins
+I really love that i got most of the animations and design looking similar to the real thing, with pacman rotating in the specified area and chomping as he always does. The ghosts looking in the direction that theyre charging, and then in their death sequence changing into eyes before rushing back to their spawn. 
+Pathfinding is in a good state. Using bfs where it can calculate the distances to every other tile, setting its distance to itself to be zero, and then going through each of its neighbours to see if theyre valid, if they are adding to the queue, if not skipping over and then marking the nececessary nodes as visited, until it reaches the targeted spot. and if it successfully reaches the target, it takes the direction towards making that possible.
 ## Bugs
 Occasionally, when pacman is empowered by a powerPellet and goes unto the same space as a ghost, the ghosts's death is not triggered.
 ## Future improvements
