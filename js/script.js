@@ -415,12 +415,10 @@ const bfs = (startPos, targetPos, ghost=0)=>{
 			}else if(ghost == orangeGhost){
 				clearInterval(orangeDeathTimer);
 			}
-			
+
 			const whatToRemove = currentlyDead.indexOf(ghost);
 			currentlyDead.splice(whatToRemove, 1);
 		}
-		
-		// document.querySelector(`#tile${ghost.position}`).classList.remove(`${ghost.animation}`);
 		const neighbours = [startPos-1, startPos+1, startPos-28, startPos+28];
 		for(const neighbour of neighbours){
 			if(neighbour <0 || neighbour>boardSize-1) continue;
@@ -555,11 +553,27 @@ const ghostDeath = (ghost)=>{
 
 	
 }
+
+
+const clearAnyRemainingScaredArtefacts = ()=>{
+	const removeElements = ["pinkGhostScared", "redGhostScared", "blueGhostScared", "orangeGhostScared",
+		"eyesLeft", "eyesRight", "eyesUp", "eyesDown"
+	]
+	for(let i = 0; i< boardSize; i++){
+		checkElem  = document.querySelector(`#tile${i}`)
+		removeElements.some((animation)=>{
+			if(checkElem.classList.contains(animation) && !(i ==pinkGhost.position || i == blueGhost.position || i == orangeGhost.position || i == redGhost.position)){
+				checkElem.classList.remove(animation)
+			}
+		})
+	}
+}
 const ghostMoveCloser = (ghost, ghostname)=>{
 	if(beginChase){
 		if(currentlyDead.includes(ghost)){
 
 		}else{
+			clearAnyRemainingScaredArtefacts();
 			let direction = bfs(ghost.position, pacman.position);
 			console.log(ghostname, direction)
 			if(direction===0 || direction === 1 || direction === 2 || direction ===3 ){
@@ -597,7 +611,6 @@ const ghostMoveCloser = (ghost, ghostname)=>{
 							}
 						}else{
 							if(ghost.position === pacman.position){
-								// currentlyDead.push(ghost);
 								ghostDeath(ghost);
 							}else{
 								ghost.animation  = "Scared";
@@ -740,7 +753,11 @@ const updatePostion = ()=>{
 			currentPosition.classList.remove("pacman","left", "right", "up", "down");
 			
 			if(cantPassThrough.slice(1).some(className => { return proposedPosition.classList.contains(className) })){
-				loseLife()
+				if(empowered){
+
+				}else{
+					loseLife()
+				}
 			}else if(proposedPosition.classList.contains("dot")){
 				score+=10;
 				proposedPosition.classList.remove("dot");
