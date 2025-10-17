@@ -723,25 +723,6 @@ const updatePostion = ()=>{
 		currentPosition.classList.add(pacman.lastdirection);
 	}else{
 			currentPosition.classList.remove("pacman","left", "right", "up", "down");
-			// const eat = ["pinkGhostScared", "blueGhostScared", "redGhostScared", "orangeGhostScared"];
-			// let itWas;
-			// if(eat.some((whichGhost)=>{
-			// 	if(proposedPosition.classList.contains(whichGhost)){
-			// 		itWas  = whichGhost;
-			// 	}
-			// 	return proposedPosition.classList.contains(whichGhost);
-			// })){
-			// 	if(itWas =="pinkGhostScared" ){
-			// 		ghostDeath(pinkGhost)
-			// 	}else if(itWas == "blueGhostScared"){
-			// 		ghostDeath(blueGhost)
-			// 	}else if(itWas == "orangGhostScared"){
-			// 		ghostDeath(orangeGhost)
-			// 	}else{
-			// 		ghostDeath(redGhost)
-			// 	}
-			// }
-			// else
 			if(cantPassThrough.slice(1).some(className => { 
 				return proposedPosition.classList.contains(className) })){
 					loseLife();
