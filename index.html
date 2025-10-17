@@ -13,10 +13,10 @@
     </header>
     <main>
         <div id="info">
-            <p id = "score" > 00</p>
+            <p id = "score" > 0</p>
             <div id  ="health-Bar">
                 <span id = "lives">x3</span>
-                <div class="pacman left" style="width: 16px;height: 16px;"></div>
+                <div class="pacman" style="width: 16px;height: 16px;"></div>
             </div>
         </div>
         <p id="game-status"></p>
@@ -24,16 +24,17 @@
 
         </section>
         <div>
-            <button id="previousBoard">
-                Previous
-            </button>
             <button id="playBoard">
                 Play
             </button>
-            <button id="nextBoard">
-                Next 
-            </button>
+
         </div>
+            <button id="previousBoard" style="visibility: hidden;">
+                Previous
+            </button>
+            <button id="nextBoard" style="visibility: hidden;">
+                Next
+            </button>
     </main>
 </body>
 </html>

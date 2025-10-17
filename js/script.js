@@ -1,5 +1,4 @@
-// board1
-// 28x36grid
+
 //boards
 //Constants
 const boardAmount =1;
@@ -47,9 +46,11 @@ let empowered;
 let gameRun;
 let beginChase;
 let pixels = [];
-// let visited =[]
 let currentlyDead  = [];
-let ghostDeathTimer;
+let redDeathTimer;
+let blueDeathTimer;
+let pinkDeathTimer;
+let orangeDeathTimer;
 let tunnelTiles;
 let emptyTiles;
 let boardSize = 868;
@@ -93,7 +94,6 @@ const boardSelector = (board)=>{
 }
 const boardLayout1 = ()=>{
 	const tiles = document.querySelectorAll(".tile");
-	//verticalDoubleLinesFlexEnd 
 	const  verticalDoubleLines = pixels.filter((pixel) =>{
 		return (pixel%28===0 ||pixel%28===27 ||[58, 86, 114, ].includes(pixel)) && ![308, 336, 364, 448, 476, 335, 363, 391,420,447, 475, 503, 531].includes(pixel);
 	} ).concat([
@@ -311,7 +311,6 @@ const boardLayout1 = ()=>{
 	const bottomLeftCornerSingle  = [114, 119, 125, 128, 134, 198, 206, 218,260,293, 296, 371, 383, 539, 542, 551,618, 623, 629, 632, 704,710,722, 725, 764, 776, 786, 797, 800];
 	const bottomRightCornerSingle  = [117, 123, 126, 132, 137, 201, 213, 221, 271, 291, 294, 372, 384, 540, 549, 552, 627, 630, 636,641,702,705, 717, 723, 763, 775, 795,798,809];
 	tiles.forEach((tile, index)=>{
-		// console.log(index);
 		tile.removeAttribute("class");
 		tile.classList.add("tile");
 		
@@ -343,8 +342,7 @@ const boardLayout1 = ()=>{
 						tile.style.backgroundPosition ="-14px -27px";
 					}else if(bottomRightCornerSingle.includes(index)){
 						tile.style.backgroundPosition ="-37px -27px";
-					}
-					// tile.appendChild(divider);
+					};
 					tile.classList.add("blocked");
 				}else if(verticalDoubleLines.includes(index) ||verticalSingleLines.includes(index)){
 					tile.style.backgroundRepeat = "no-repeat";
@@ -354,7 +352,6 @@ const boardLayout1 = ()=>{
 					}else {
 						tile.style.backgroundPosition ="-0px -40px";
 					}
-					// tile.appendChild(divider)
 					tile.classList.add("blocked");
 				}else if( horizontalDoubleLines.includes(index) || horizontalSingleLines.includes(index)){
 					tile.style.backgroundRepeat = "no-repeat";
@@ -364,7 +361,6 @@ const boardLayout1 = ()=>{
 					}else{
 						tile.style.backgroundPosition ="-20px -72px";
 					}
-					// tile.appendChild(divider)
 					tile.classList.add("blocked");
 				}
 				else if(index === 85 ||index ===110|| index === 645 || index === 670){
@@ -372,148 +368,34 @@ const boardLayout1 = ()=>{
 				}else if(index == 404){
 					pinkGhost.spawn = index;
 					pinkGhost.position = index;
-					tile.classList.add(`pinkGhost${pinkGhost.animation}`)
+					tile.classList.add(`pinkGhost${pinkGhost.animation}`);
 				}else if(index ==405){
 					blueGhost.spawn =index;
 					blueGhost.position = index;
-					tile.classList.add(`blueGhost${blueGhost.animation}`)
+					tile.classList.add(`blueGhost${blueGhost.animation}`);
 				}else if(index == 406){
 					redGhost.spawn = index;
 					redGhost.position = index;
-					tile.classList.add(`redGhost${redGhost.animation}`)
-					// ti
+					tile.classList.add(`redGhost${redGhost.animation}`);
 				}else if(index == 407){
 					orangeGhost.spawn = index;
 					orangeGhost.position =  index;
-					tile.classList.add(`orangeGhost${orangeGhost.animation}`)
+					tile.classList.add(`orangeGhost${orangeGhost.animation}`);
 				}else if(index == 657){
 					pacman.spawn = index;
 					pacman.position = index;
-					tile.classList.add("pacman")
+					tile.classList.add("pacman");
 				}else{
 					const dot = document.createElement("div");
 					tile.classList.add("dot")
 					tile.appendChild(dot);
 				}
 			}
-			
-		// }
 	});
 }
 
-	// const movementAlgorithm =(currentPosition, targetPosition)=>{
-	// 	if(currentPosition === targetPosition){
-	// 		console.log("is here the issue")
-	// 		return step;
-	// 	}else if(document.querySelector(`#tile${currentPosition}`).classList.contains("blocked")||visited.includes(currentPosition)){
-	// 		// console.log("is here the issue")
-	// 		return undefined;
-	// 	}
-	// 	// else if(visited.includes(currentPosition)){
-	// 	// 	// console.log("is here the issue")
-	// 	// 	return undefined;
-	// 	// }
-	// 	else{
-	// 		step +=1;
-	// 		visited.push(currentPosition);
-	// 		const leftMove =  currentPosition -1;
-	// 		const rightMove =  currentPosition +1;
-	// 		const upMove =  currentPosition -28;
-	// 		const downMove =  currentPosition +28;
-	// 		const possibleMoves = [leftMove, rightMove,  upMove, downMove];
-	// 		const lengthCount = [0,0,0,0];
-			
-	// 		possibleMoves.forEach((move, index)=>{
-	// 			const output = movementAlgorithm(move, targetPosition);
-	// 			if(typeof output === "number" && !isNaN(output)){
-	// 				console.log(output)
-	// 				lengthCount[index] = step;
-	// 			} else{
-	// 				lengthCount[index] = null;
-	// 			}
-	// 		})
-	// 		// const lengths = [Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER];
-	// 		// if(!visited.includes(leftMove)){
-	// 			// visited.push(leftMove);
-	// 			// lengths[0]= dijkstraAlgorithm(leftMove, targetPosition) +1; 
-	// 		// }
-	// 		// if(!visited.includes(rightMove)){
-	// 			// visited.push(rightMove);
-	// 			// lengths[1] = dijkstraAlgorithm(rightMove, targetPosition) +1;
-	// 		// }
-	// 		// if(!visited.includes(upMove)){
-	// 			// visited.push(upMove);
-	// 			// lengths[2] = dijkstraAlgorithm(upMove, targetPosition) +1;
-	// 		// }
-	// 		// if(!visited.includes(downMove)){
-	// 			// visited.push(downMove);
-	// 			// lengths[3] = dijkstraAlgorithm(downMove, targetPosition) +1;
-	// 		// }
 
-	// 		// let smallestDistance = Number.MAX_SAFE_INTEGER;
-	// 		// let direction;
-	// 		// lengths.forEach((length, index)=>{
-	// 		// 	if(empowered){
-	// 		// 		smallestDistance = Number.MIN_SAFE_INTEGER;
-	// 		// 		if(length>smallestDistance){
-	// 		// 			smallestDistance = length;
-	// 		// 			direction = index;
-	// 		// 		}
-	// 		// 	}else{
-	// 		// 		if(length<smallestDistance){
-	// 		// 			smallestDistance = length;
-	// 		// 			direction = index;
-	// 		// 		}
-	// 		// 	}
-				
-	// 		// })
-	// 		console.log(lengthCount)
-	// 		return empowered ? Math.max(lengthCount.filter(number => {(typeof number =="number" && !isNaN(number))})) : Math.min(lengthCount.filter(number => {(typeof number =="number" && !isNaN(number))}));
-	// 		// console.log([dijkstraAlgorithm(leftMove, targetPosition) , dijkstraAlgorithm(rightMove, targetPosition) , dijkstraAlgorithm(upMove, targetPosition) , dijkstraAlgorithm(downMove, targetPosition) ])
-	// 		// if(empowered){
-	// 		// 	return Math.max(...[dijkstraAlgorithm(leftMove, targetPosition) +1 , dijkstraAlgorithm(rightMove, targetPosition) +1, dijkstraAlgorithm(upMove, targetPosition)+1 , dijkstraAlgorithm(downMove, targetPosition)+1 ].filter((pathway) => { return !isNaN(pathway)}));
-	// 		// }else{
-	// 		// 	return Math.min(...[dijkstraAlgorithm(leftMove, targetPosition) , dijkstraAlgorithm(rightMove, targetPosition) , dijkstraAlgorithm(upMove, targetPosition) , dijkstraAlgorithm(downMove, targetPosition) ].filter((pathway) => { return !isNaN(pathway)}));
-	// 		// }
-	// 		// return direction;
-	// 	}
-		
-	// }
-
-// const dijkstraAlgorithm = (startPos, targetPos)=>{
-// 	const unvisitedNodes  = [];
-// 	document.querySelectorAll(".tile").forEach((tile, index)=>{
-// 		unvisitedNodes.push(index);
-// 	});
-// 	const visitedNodes = [];
-// 	const distance = Array(boardSize).fill(Number.MAX_SAFE_INTEGER);
-// 	const distanceFrom = Array(boardSize).fill(Number.MAX_SAFE_INTEGER);
-// 	distance[startPos] = 0; 
-// 	const currentPosition = startPos;
-// 	// unvisitedNodes.forEach((location)=>{
-// 	const neighbours = [currentPosition-1, currentPosition+1, currentPosition-28, currentPosition+28];
-// 	neighbours.forEach((neighbour)=>{
-// 			if(document.querySelector(`#tile${neighbour}`).classList.includes("blocked")){
-
-// 			}else{
-// 				if(distance[currentPosition]+1 <distance[neighbour]){
-// 					distance[neighbour] = distance[currentPosition] +1;
-// 					distanceFrom[neighbour] =currentPosition;
-// 				}
-// 			}
-// 		});
-	
-// 	// })
-// 	visitedNodes.push(currentPosition);
-// 	unvisitedNodes.splice(currentPosition);
-// 	const eligihb
-// 	currentPosition = Math.min(...neighbours.filter((neighbour)=>{
-// 		return !visitedNodes.includes(neighbour)
-// 	}))
-
-// }
-
-const bfs = (startPos, targetPos, whatToRemove = 0)=>{
+const bfs = (startPos, targetPos, ghost=0)=>{
 	const queue = [startPos];
 	const visitedTiles = Array(boardSize).fill(false);
 	const distances = Array(boardSize).fill(Infinity);
@@ -521,14 +403,45 @@ const bfs = (startPos, targetPos, whatToRemove = 0)=>{
 	visitedTiles[startPos] = true;
 	const pathToTarget = Array(boardSize).fill(`${startPos}`);
 	if(startPos === targetPos){
-		clearInterval(ghostDeathTimer);
-		currentlyDead.splice(whatToRemove, 1);
+		if(!empowered){
+			loseLife();
+		}{
+			if(ghost == pinkGhost){
+				clearInterval(pinkDeathTimer);
+			}else if(ghost  == blueGhost){
+				clearInterval(blueDeathTimer);
+			}else if(ghost == redGhost){
+				clearInterval(redDeathTimer);
+			}else if(ghost == orangeGhost){
+				clearInterval(orangeDeathTimer);
+			}
+			
+			const whatToRemove = currentlyDead.indexOf(ghost);
+			currentlyDead.splice(whatToRemove, 1);
+		}
+		
+		// document.querySelector(`#tile${ghost.position}`).classList.remove(`${ghost.animation}`);
+		const neighbours = [startPos-1, startPos+1, startPos-28, startPos+28];
+		for(const neighbour of neighbours){
+			if(neighbour <0 || neighbour>boardSize-1) continue;
+			if(cantPassThrough.some(className => { return document.querySelector(`#tile${neighbour}`).classList.contains(className) })|| visitedTiles[neighbour] === true) continue;
+			
+			if(neighbour == startPos-1){
+				return 0;
+			}else if(neighbour == startPos+1){
+				return 1;
+			}else if(neighbour  == startPos-28){
+				return 2;
+			}else if(neighbour == startPos+28){
+				return 3;
+			}
+			
+		}
+		return;
 	}
 	while(queue.length >0){
 		const currentPos = queue.shift();
-		// console.log(currentPos)
 		if(currentPos === targetPos){
-			// if(currentPos)
 			const nextMove = pathToTarget[currentPos].split("->")[1];
 			if(nextMove == startPos-1){
 				return 0;
@@ -539,24 +452,16 @@ const bfs = (startPos, targetPos, whatToRemove = 0)=>{
 			}else if(nextMove == startPos+28){
 				return 3;
 			}
-			// return[ distances[currentPos], nextMove];
 		}
 		visitedTiles[currentPos] = true;
 		const neighbours = [currentPos-1, currentPos+1, currentPos-28, currentPos+28];
 		for(const neighbour of neighbours){
-			// console.log(neighbour)
 			if(neighbour <0 || neighbour>boardSize-1) continue;
-			// if ((currentPos % 28 === 0 && neighbour === currentPos - 1) || (currentPos % 28 === 28 - 1 && neighbour === currentPos + 1)) {
-        	// 	continue;
-      		// }
-			// if(document.querySelector(`#tile${neighbour}`).classList.contains("blocked") || visitedTiles[neighbour] === true) continue;
 			if(cantPassThrough.some(className => { return document.querySelector(`#tile${neighbour}`).classList.contains(className) })|| visitedTiles[neighbour] === true) continue;
 			
 			queue.push(neighbour);
-			// distances[neighbour] = distances[currentPos]+1;
 			visitedTiles[neighbour] = true;
 			pathToTarget[neighbour] = pathToTarget[currentPos] +`->${neighbour}`;
-			// console.log(neighbour)
 			
 		}
 
@@ -568,8 +473,9 @@ const ghostDeath = (ghost)=>{
 	currentlyDead.push(ghost);
 	score+=ghostBounty;
 	ghostBounty+=200;
-	ghostDeathTimer = setInterval(()=>{
-		const direction = bfs(ghost.position, ghost.spawn, currentlyDead.indexOf(ghost));
+	if(ghost == pinkGhost){
+		pinkDeathTimer = setInterval(()=>{
+		const direction = bfs(ghost.position, ghost.spawn, ghost);
 		document.querySelector(`#tile${ghost.position}`).classList.remove(`${ghost.animation}`);
 		if(direction ==0){
 			ghost.position = ghost.position -1;
@@ -586,6 +492,65 @@ const ghostDeath = (ghost)=>{
 		}
 		document.querySelector(`#tile${ghost.position}`).classList.add(`${ghost.animation}`);
 	}, 25)
+	}else if(ghost == blueGhost){
+		blueDeathTimer = setInterval(()=>{
+		const direction = bfs(ghost.position, ghost.spawn, ghost);
+		document.querySelector(`#tile${ghost.position}`).classList.remove(`${ghost.animation}`);
+		if(direction ==0){
+			ghost.position = ghost.position -1;
+			ghost.animation = "eyesLeft";
+		}else if(direction ==1){
+			ghost.position = ghost.position +1;
+			ghost.animation = "eyesRight";
+		}else if(direction ==2){
+			ghost.position = ghost.position -28;
+			ghost.animation = "eyesUp";
+		}else if(direction ==3){
+			ghost.position = ghost.position +28;
+			ghost.animation = "eyesDown";
+		}
+		document.querySelector(`#tile${ghost.position}`).classList.add(`${ghost.animation}`);
+	}, 25)
+	}else if(ghost == redGhost){
+	redDeathTimer = setInterval(()=>{
+		const direction = bfs(ghost.position, ghost.spawn, ghost);
+		document.querySelector(`#tile${ghost.position}`).classList.remove(`${ghost.animation}`);
+		if(direction ==0){
+			ghost.position = ghost.position -1;
+			ghost.animation = "eyesLeft";
+		}else if(direction ==1){
+			ghost.position = ghost.position +1;
+			ghost.animation = "eyesRight";
+		}else if(direction ==2){
+			ghost.position = ghost.position -28;
+			ghost.animation = "eyesUp";
+		}else if(direction ==3){
+			ghost.position = ghost.position +28;
+			ghost.animation = "eyesDown";
+		}
+		document.querySelector(`#tile${ghost.position}`).classList.add(`${ghost.animation}`);
+	}, 25)
+	}else if(ghost == orangeGhost){
+	orangeDeathTimer = setInterval(()=>{
+		const direction = bfs(ghost.position, ghost.spawn, ghost);
+		document.querySelector(`#tile${ghost.position}`).classList.remove(`${ghost.animation}`);
+		if(direction ==0){
+			ghost.position = ghost.position -1;
+			ghost.animation = "eyesLeft";
+		}else if(direction ==1){
+			ghost.position = ghost.position +1;
+			ghost.animation = "eyesRight";
+		}else if(direction ==2){
+			ghost.position = ghost.position -28;
+			ghost.animation = "eyesUp";
+		}else if(direction ==3){
+			ghost.position = ghost.position +28;
+			ghost.animation = "eyesDown";
+		}
+		document.querySelector(`#tile${ghost.position}`).classList.add(`${ghost.animation}`);
+	}, 25)
+	}
+	
 	document.querySelector(`#tile${ghost.position}`).classList.remove(`${ghost.animation}`);
 
 	
@@ -597,7 +562,7 @@ const ghostMoveCloser = (ghost, ghostname)=>{
 		}else{
 			let direction = bfs(ghost.position, pacman.position);
 			console.log(ghostname, direction)
-			if(direction!= Infinity){
+			if(direction===0 || direction === 1 || direction === 2 || direction ===3 ){
 				document.querySelector(`#tile${ghost.position}`).classList.remove(`${ghostname}${ghost.animation}`);
 				if(direction === 0){
 					console.log(ghost.position)
@@ -608,10 +573,7 @@ const ghostMoveCloser = (ghost, ghostname)=>{
 						ghost.animation = "Left";
 
 						newPosition.classList.add(`${ghostname}${ghost.animation}`);
-						if(ghost.position === pacman.position){
-							loseLife();
-						}
-					
+						
 					}else{
 						
 						if(ghost.position === pacman.position){
@@ -667,7 +629,7 @@ const ghostMoveCloser = (ghost, ghostname)=>{
 						ghost.animation = "Down";
 						newPosition.classList.add(`${ghostname}${ghost.animation}`);
 						if(ghost.position === pacman.position){
-							loseLife();
+								loseLife();
 						}
 					}else{
 						if(ghost.position === pacman.position){
@@ -677,7 +639,7 @@ const ghostMoveCloser = (ghost, ghostname)=>{
 							newPosition.classList.add(`${ghostname}${ghost.animation}`);
 						}
 					}
-				}	
+				}
 			}
 		}
 		
@@ -687,29 +649,36 @@ const ghostMoveCloser = (ghost, ghostname)=>{
 
 const loseSequence = ()=>{
 	clearInterval(gameRun);
-	clearInterval(ghostDeathTimer);
+	clearInterval(redDeathTimer); 
+	clearInterval(blueDeathTimer); 
+	clearInterval(orangeDeathTimer); 
+	clearInterval(pinkDeathTimer);
 
 	gameStatus.textContent = "GAME OVER";
-	prevBoardElem.style.visibility ="visible";
-	nextBoardElem.style.visibility ="visible";
+	prevBoardElem.style.visibility ="hidden";
+	nextBoardElem.style.visibility ="hidden";
 	playBoardElem.style.visibility ="visible";
 }
 const hasWon = ()=>{
 	const remainingDots = document.querySelectorAll(".dot")
 	if(remainingDots.length == 0 ){
 		clearInterval(gameRun);
+		clearInterval(redDeathTimer); 
+		clearInterval(blueDeathTimer); 
+		clearInterval(orangeDeathTimer); 
+		clearInterval(pinkDeathTimer);
 		gameStatus = "YOU WIN";
-		prevBoardElem.style.visibility ="visible";
-		nextBoardElem.style.visibility ="visible";
+		prevBoardElem.style.visibility ="hidden";
+		nextBoardElem.style.visibility ="hidden";
 		playBoardElem.style.visibility ="visible";
 	}
 }
 const loseLife = ()=>{
 
 	document.querySelector(`#tile${pacman.position}`).classList.remove("pacman", pacman.lastdirection);
-	pacman.lives -=1
+	pacman.lives -=1;
 	if(pacman.lives <=0){
-		loseSequence()
+		loseSequence();
 	}
 	pacman.position = pacman.spawn;
 	document.querySelector(`#tile${pacman.spawn}`).classList.add("pacman", pacman.lastdirection);
@@ -717,13 +686,12 @@ const loseLife = ()=>{
 const playGame = ()=>{
 	updatePostion();
 	ghostMoveCloser(redGhost, "redGhost");
-	// ghostMoveCloser(blueGhost, "blueGhost");
-	// ghostMoveCloser(pinkGhost, "pinkGhost");
-	// ghostMoveCloser(orangeGhost, "orangeGhost");
-	// ghostMoveCloser(redGhost, "redGhost")
+	ghostMoveCloser(blueGhost, "blueGhost");
+	ghostMoveCloser(pinkGhost, "pinkGhost");
+	ghostMoveCloser(orangeGhost, "orangeGhost");
 	hasWon();
 	scoreElem.textContent = score;
-	livesElem.textContent = `x${pacman.lives}`
+	livesElem.textContent = `x${pacman.lives}`;
 }
 const updatePostion = ()=>{
 	let proposedPosition;
@@ -765,7 +733,6 @@ const updatePostion = ()=>{
 			proposedPosition = document.querySelector(`#tile${(pacman.position+modifier)%boardSize}`);
 		};
 	}
-	// console.log(`#tile${proposedPosition}`);
 	if(proposedPosition.classList.contains("blocked")){
 		currentPosition.classList.remove("left", "right", "up", "down");
 		currentPosition.classList.add(pacman.lastdirection);
@@ -796,7 +763,7 @@ const updatePostion = ()=>{
 }
 
 const init = ()=>{
-
+	currentlyDead = [];
 	prevBoardElem.style.visibility ="hidden";
 	nextBoardElem.style.visibility ="hidden";
 	playBoardElem.style.visibility ="hidden";
@@ -804,7 +771,7 @@ const init = ()=>{
 	pacman.lastdirection = null;
 	pacman.lives = 3;
 	score = 0;
-	scoreElem.textContent = "00";
+	scoreElem.textContent = score;
 	beginChase = false;
 	redGhost.position =  redGhost.spawn;
 	blueGhost.position =  blueGhost.spawn;
@@ -812,7 +779,6 @@ const init = ()=>{
 	orangeGhost.position =  orangeGhost.spawn;
 	// clearInterval(gameRun);
 	boardSelector(currentboard);
-	// gameStatus.textContent  = "GAME START";
 	let countDown =4;
 	let counter = setInterval(()=>{
 		countDown-=1
@@ -822,8 +788,6 @@ const init = ()=>{
 		clearInterval(counter);
 		gameStatus.textContent = "";
 		document.addEventListener("keydown",(event)=>{
-			// console.log(event.key);
-			// const 
 			if(event.key === "ArrowRight" || event.key.toLowerCase() === "d"){
 				pacman.lastdirection = "right";
 			}else if(event.key === "ArrowLeft" || event.key.toLowerCase() === "a"){
@@ -843,7 +807,6 @@ const init = ()=>{
 
 setTiles();
 boardSelector(0);
-// console.log(bfs(pinkGhost.position, pacman.position));
 //Eventlistener
 nextBoardElem.addEventListener("click", ()=>{
 	currentboard = (currentboard+1)%boardAmount;
@@ -863,5 +826,3 @@ playBoardElem.addEventListener("click", ()=>{
 	gameStatus.textContent  = "GAME START";
 	init();
 })
-
-// console.log(boardElement);

@@ -23,13 +23,11 @@ main{
     width: 448px;
     margin-bottom: 10px;
     pointer-events: none;
-    /* width:  700px; */
 }
 #health-Bar{
     display:  flex;
     pointer-events:  none;
     align-items: center;
-    /* flex-direction: row; */
 }
 #game-status{
     position: absolute;
@@ -49,7 +47,7 @@ main{
 	background-position : -903px -168px;
 	background-repeat: no-repeat;
     animation: blinkingPellet 0.4s steps(2) infinite;
-    /* z-index: -1; */
+
 }
 @keyframes blinkingPellet {
     from {background-position: -903px -168px;}
@@ -101,12 +99,7 @@ main{
     from {background-position:-201px -168px;}
     to {background-position:-235px -168px;}
 }
-/* .blueGhost{
-    background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
-	background-position:-503px -83px;
-	background-repeat: no-repeat;
-    animation: blueScaredIdle 0.4s steps(2) infinite;
-} */
+
 .blueGhostLeft{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
 	/* background-position:-269px -83px; */
@@ -185,7 +178,7 @@ main{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
 	/* background-position:-269px -83px; */
 	background-repeat: no-repeat;
-    animation: blueGhostScared 0.4s steps(2) infinite;
+    animation: redGhostScared 0.4s steps(2) infinite;
 }
 @keyframes redGhostUp {
     from {background-position:-103px -83px;}
@@ -262,19 +255,23 @@ main{
     background-image:  url('../assets/Pac-Man - All Assets_Palettes.png');
 	background-position:-503px -337px;
 	background-repeat: no-repeat;
-    animation: pacmanIdle 0.4s steps(2) infinite ;
+    
 }
 .right{
     transform: rotate(0deg);
+    animation: pacmanIdle 0.4s steps(2) infinite;
 }
 .left{
     transform: rotate(180deg);
+    animation: pacmanIdle 0.4s steps(2) infinite;
 }
 .up{
     transform: rotate(270deg);
+    animation: pacmanIdle 0.4s steps(2) infinite;
 }
 .down{
     transform: rotate(90deg);
+    animation: pacmanIdle 0.4s steps(2) infinite;
 }
 
 @keyframes pacmanIdle {
