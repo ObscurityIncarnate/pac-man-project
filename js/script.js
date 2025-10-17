@@ -571,7 +571,6 @@ const clearAnyRemainingScaredArtefacts = ()=>{
 const ghostMoveCloser = (ghost, ghostname)=>{
 	if(beginChase){
 		if(currentlyDead.includes(ghost)){
-
 		}else{
 			clearAnyRemainingScaredArtefacts();
 			let direction = bfs(ghost.position, pacman.position);
@@ -581,17 +580,13 @@ const ghostMoveCloser = (ghost, ghostname)=>{
 				if(direction === 0){
 					console.log(ghost.position)
 					ghost.position = ghost.position-1;
-					const newPosition = document.querySelector(`#tile${ghost.position}`);
-					// newPosition.classList.add(`${ghostname}`);
+					const newPosition = document.querySelector(`#tile${ghost.position}`);;
 					if(!empowered){
 						ghost.animation = "Left";
-
-						newPosition.classList.add(`${ghostname}${ghost.animation}`);
-						
+						newPosition.classList.add(`${ghostname}${ghost.animation}`);		
 					}else{
 						
 						if(ghost.position === pacman.position){
-							// currentlyDead.push(ghost);
 							ghostDeath(ghost);
 						}else{
 							ghost.animation  = "Scared";
@@ -602,7 +597,6 @@ const ghostMoveCloser = (ghost, ghostname)=>{
 				}else if(direction === 1){
 						ghost.position = ghost.position+1;
 						const newPosition = document.querySelector(`#tile${ghost.position}`);
-						// newPosition.classList.add(`${ghostname}`);
 						if(!empowered){
 							ghost.animation = "Right";
 							newPosition.classList.add(`${ghostname}${ghost.animation}`);
@@ -751,13 +745,9 @@ const updatePostion = ()=>{
 		currentPosition.classList.add(pacman.lastdirection);
 	}else{
 			currentPosition.classList.remove("pacman","left", "right", "up", "down");
-			
-			if(cantPassThrough.slice(1).some(className => { return proposedPosition.classList.contains(className) })){
-				if(empowered){
-
-				}else{
-					loseLife()
-				}
+			if(cantPassThrough.slice(1).some(className => { 
+				return proposedPosition.classList.contains(className) })){
+					loseLife();
 			}else if(proposedPosition.classList.contains("dot")){
 				score+=10;
 				proposedPosition.classList.remove("dot");
@@ -794,7 +784,7 @@ const init = ()=>{
 	blueGhost.position =  blueGhost.spawn;
 	pinkGhost.position =  pinkGhost.spawn;
 	orangeGhost.position =  orangeGhost.spawn;
-	// clearInterval(gameRun);
+	clearInterval(gameRun);
 	boardSelector(currentboard);
 	let countDown =4;
 	let counter = setInterval(()=>{
