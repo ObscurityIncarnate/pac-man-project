@@ -1,4 +1,29 @@
 # Pacman Project
+##
+
+## Tehcnologies Used:
+HTML, CSS, Javascript.
+## Bugs
+Occasionally, when pacman is empowered by a powerPellet and goes unto the same space as a ghost, the ghosts's death is not triggered.
+## Future improvements
+Rendering the entire page at once, rather than rendering the individual elements at point of change.
+Ghosts moving slower when they are scared.
+Ghosts moving away from pacman when they are scared.
+Ghost animation(where the ghosts flash white) triggering when the "Empowered" state duration is almost over.
+Mutltiple boards and levels.
+Weakening the ghosts' ai so they dont always take the best path.
+Performance Optimizations.
+Leaderboard Implementation.
+Pacman death Animation
+## How to Play
+On page load click on the start button.
+A countdown sequence should ensue.
+Once countdown is over, control pacman by using (WASD) or ((←↑→↓)).
+Collect as many pellets as you can by moving into a space with a pellet.
+Avoid the ghosts, they will chase you and coming into contact with them reduces your number of lives.
+Go through tunnels for a quick escape and come out the other side.
+If your number of lives hits zero you lose and the game is over.
+Eat all the pellets to win.
 ## User Flow
 User lands on webpage
 User is asked to enter a name.
@@ -28,8 +53,6 @@ if pacman wins the game is over
 victory message goes across the board either you win. or you lost
 after game is over show leader
 ## Special Thanks and Credits
-Special thanks go out to 
-Steven Nguyen (Steve93021), from whom I sourced all the GIFs and Pac-Man character images. Check them out at [here](https://www.deviantart.com/steve93021).
 Character Sprites provided by Caylie C [available on](https://www.spriters-resource.com/arcade/pacman/asset/159361/)
 Map Sprites provided by Superjustinbros [avaialable on](https://www.spriters-resource.com/arcade/pacman/asset/52631/)
 This could not have been possible without their great resources.
