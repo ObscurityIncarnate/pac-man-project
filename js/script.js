@@ -553,11 +553,9 @@ const ghostMoveCloser = (ghost, ghostname)=>{
 		}else{
 			clearAnyRemainingScaredArtefacts();
 			let direction = bfs(ghost.position, pacman.position);
-			console.log(ghostname, direction)
 			if(direction===0 || direction === 1 || direction === 2 || direction ===3 ){
 				document.querySelector(`#tile${ghost.position}`).classList.remove(`${ghostname}${ghost.animation}`);
 				if(direction === 0){
-					console.log(ghost.position)
 					ghost.position = ghost.position-1;
 					const newPosition = document.querySelector(`#tile${ghost.position}`);;
 					if(!empowered){
@@ -646,7 +644,7 @@ const loseSequence = ()=>{
 	playBoardElem.style.visibility ="visible";
 }
 const hasWon = ()=>{
-	const remainingDots = document.querySelectorAll(".dot")
+	const remainingDots = document.querySelectorAll(".dot");
 	if(remainingDots.length == 0 ){
 		clearInterval(gameRun);
 		clearInterval(redDeathTimer); 
@@ -724,6 +722,25 @@ const updatePostion = ()=>{
 		currentPosition.classList.add(pacman.lastdirection);
 	}else{
 			currentPosition.classList.remove("pacman","left", "right", "up", "down");
+			// const eat = ["pinkGhostScared", "blueGhostScared", "redGhostScared", "orangeGhostScared"];
+			// let itWas;
+			// if(eat.some((whichGhost)=>{
+			// 	if(proposedPosition.classList.contains(whichGhost)){
+			// 		itWas  = whichGhost;
+			// 	}
+			// 	return proposedPosition.classList.contains(whichGhost);
+			// })){
+			// 	if(itWas =="pinkGhostScared" ){
+			// 		ghostDeath(pinkGhost)
+			// 	}else if(itWas == "blueGhostScared"){
+			// 		ghostDeath(blueGhost)
+			// 	}else if(itWas == "orangGhostScared"){
+			// 		ghostDeath(orangeGhost)
+			// 	}else{
+			// 		ghostDeath(redGhost)
+			// 	}
+			// }
+			// else
 			if(cantPassThrough.slice(1).some(className => { 
 				return proposedPosition.classList.contains(className) })){
 					loseLife();
